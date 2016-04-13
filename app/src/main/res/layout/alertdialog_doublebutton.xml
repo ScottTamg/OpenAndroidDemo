@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_message"
+        android:layout_width="270dp"
+        android:layout_height="123dp"
+        android:paddingLeft="@dimen/dialog_padding"
+        android:paddingRight="@dimen/dialog_padding"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/dialog_top"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="15sp" />
+
+    <View
+        android:id="@+id/line_dialog"
+        android:layout_width="270dp"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/tv_message"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/tv_button_left"
+        android:layout_width="135dp"
+        android:layout_height="44dp"
+        android:layout_alignLeft="@id/tv_message"
+        android:layout_below="@id/line_dialog"
+        android:background="@drawable/btn_selector_dialog_left"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/tv_button_right"
+        android:layout_width="135dp"
+        android:layout_height="44dp"
+        android:layout_alignRight="@id/tv_message"
+        android:layout_below="@id/line_dialog"
+        android:background="@drawable/btn_selector_dialog_right"
+        android:gravity="center"
+        android:text="确定"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+</RelativeLayout>
