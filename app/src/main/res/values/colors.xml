@@ -9,11 +9,13 @@
     <color name="black">#FFFFFF</color>
     <color name="tab_bottom_tv">#F2602D</color>
     <color name="tab_tv_color_night">#888888</color>
-    <color name="white">#FFFFFF</color>
+    <color name="white">#ffffff</color>
     <color name="tv_huise">#A1A1A1</color>
     <color name="tv_black">#B7B7B7</color>
     <color name="text_hui">#282622</color>
     <color name="text_back">#292423</color>
     <color name="toastback">#98000000</color>
     <color name="rl_item_pressed">#FBFBFB</color>
+    <color name="readtitle">#848484</color>
+    <color name="color_00">#8A000000</color>
 </resources>

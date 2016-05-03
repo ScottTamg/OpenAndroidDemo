@@ -4,17 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.Window;
+import android.widget.Toast;
 
 import com.anxin.changbaishan.R;
 import com.anxin.changbaishan.utils.LoadDataUtil;
-import com.anxin.changbaishan.utils.ToastView;
-import com.anxin.changbaishan.view.MyApplication;
 import com.anxin.changbaishan.utils.SPUtil;
+import com.anxin.changbaishan.view.MyApplication;
 import com.anxin.changbaishan.widget.CustomProgressDialog;
-
-import java.lang.Override;
 
 /**
  * Created by Txw on 2016/3/31.
@@ -119,12 +116,14 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected void showLongToast(String pMsg) {
-        ToastView toastView = new ToastView(this, Gravity.BOTTOM, false, pMsg, null);
-        toastView.showLong();
+        Toast.makeText(this, pMsg, Toast.LENGTH_LONG).show();
+//        ToastView toastView = new ToastView(this, Gravity.BOTTOM, false, pMsg, null);
+//        toastView.showLong();
     }
 
-    protected void showShortToast(String pMsg) {
-        ToastView toastView = new ToastView(this, Gravity.BOTTOM, false, pMsg, null);
-        toastView.show();
+    public void showShortToast(String pMsg) {
+        Toast.makeText(this, pMsg, Toast.LENGTH_SHORT).show();
+//        ToastView toastView = new ToastView(this, Gravity.BOTTOM, false, pMsg, null);
+//        toastView.show();
     }
 }

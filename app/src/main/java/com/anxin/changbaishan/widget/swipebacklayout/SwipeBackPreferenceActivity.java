@@ -1,3 +1,4 @@
+
 package com.anxin.changbaishan.widget.swipebacklayout;
 
 import android.os.Bundle;
@@ -11,7 +12,7 @@ public class SwipeBackPreferenceActivity extends PreferenceActivity implements S
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mHelper = new SwipeBackActivityHelper(this);
-        mHelper.onActivtyCreate();
+        mHelper.onActivityCreate();
     }
 
     @Override
@@ -27,12 +28,11 @@ public class SwipeBackPreferenceActivity extends PreferenceActivity implements S
             return mHelper.findViewById(id);
         return v;
     }
-
+    
     @Override
     public SwipeBackLayout getSwipeBackLayout() {
         return mHelper.getSwipeBackLayout();
     }
-
     @Override
     public void setSwipeBackEnable(boolean enable) {
         getSwipeBackLayout().setEnableGesture(enable);

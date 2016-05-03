@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/tv_message"
@@ -14,7 +14,7 @@
         android:gravity="center"
         android:text=""
         android:textColor="@color/black"
-        android:textSize="15sp" />
+        android:textSize="15sp"/>
 
     <View
         android:id="@+id/line_dialog"
@@ -22,7 +22,7 @@
         android:layout_height="0.5dp"
         android:layout_below="@id/tv_message"
         android:layout_centerHorizontal="true"
-        android:background="@color/colorPrimary" />
+        android:background="@color/colorPrimary"/>
 
     <TextView
         android:id="@+id/tv_button_left"
@@ -34,7 +34,7 @@
         android:gravity="center"
         android:text="取消"
         android:textColor="@color/colorPrimary"
-        android:textSize="14sp" />
+        android:textSize="14sp"/>
 
     <TextView
         android:id="@+id/tv_button_right"
@@ -46,5 +46,5 @@
         android:gravity="center"
         android:text="确定"
         android:textColor="@color/white"
-        android:textSize="14sp" />
+        android:textSize="14sp"/>
 </RelativeLayout>

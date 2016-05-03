@@ -55,13 +55,17 @@ public class DummyContent {
      */
     public static class DummyItem {
         public final String id;
-        public final String content;
-        public final String details;
+        public String content;
+        public String details;
+        public int number;
+        public boolean isChecked;
 
         public DummyItem(String id, String content, String details) {
             this.id = id;
             this.content = content;
             this.details = details;
+            this.number = 1;
+            this.isChecked = false;
         }
 
         @Override

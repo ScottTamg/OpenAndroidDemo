@@ -5,14 +5,14 @@ package com.anxin.changbaishan.view.base;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.anxin.changbaishan.R;
-import com.anxin.changbaishan.view.base.BaseActivity;
 import com.anxin.changbaishan.widget.swipebacklayout.SwipeBackActivityBase;
 import com.anxin.changbaishan.widget.swipebacklayout.SwipeBackActivityHelper;
 import com.anxin.changbaishan.widget.swipebacklayout.SwipeBackLayout;
+import com.anxin.changbaishan.widget.swipebacklayout.Utils;
 
 public class SwipeBackActivity extends BaseActivity implements SwipeBackActivityBase {
     private SwipeBackActivityHelper mHelper;
@@ -21,7 +21,7 @@ public class SwipeBackActivity extends BaseActivity implements SwipeBackActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mHelper = new SwipeBackActivityHelper(this);
-        mHelper.onActivtyCreate();
+        mHelper.onActivityCreate();
     }
 
     @Override
@@ -50,36 +50,43 @@ public class SwipeBackActivity extends BaseActivity implements SwipeBackActivity
 
     @Override
     public void scrollToFinishActivity() {
+        Utils.convertActivityToTranslucent(this);
         getSwipeBackLayout().scrollToFinishActivity();
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            finish();
-            overridePendingTransition(R.anim.back_in, R.anim.back_out);
+//            finish();
+//            overridePendingTransition(R.anim.back_in, R.anim.back_out);
+            Utils.convertActivityToTranslucent(this);
+            getSwipeBackLayout().scrollToFinishActivity();
         }
-        return super.onKeyDown(keyCode, event);
+//        return super.onKeyDown(keyCode, event);
+        return true;
     }
 
     protected void setTitleName(String title) {
-        TextView textView = (TextView) findViewById(R.id.title_textview);
+        TextView textView = (TextView) findViewById(R.id.tv_title);
         textView.setText(title);
     }
 
     protected void setNoBack() {
-        ImageView back = (ImageView) findViewById(R.id.title_goback);
+        LinearLayout back = (LinearLayout) findViewById(R.id.ll_left);
         back.setVisibility(View.GONE);
     }
 
     protected void setBack() {
-        ImageView back = (ImageView) findViewById(R.id.title_goback);
+        LinearLayout back = (LinearLayout) findViewById(R.id.ll_left);
         back.setVisibility(View.VISIBLE);
+        Utils.convertActivityToTranslucent(this);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-                overridePendingTransition(R.anim.back_in, R.anim.back_out);
+
+//                finish();
+//                overridePendingTransition(R.anim.back_in, R.anim.back_out);
+                getSwipeBackLayout().scrollToFinishActivity();
             }
         });
     }

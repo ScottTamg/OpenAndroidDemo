@@ -13,7 +13,7 @@ import com.anxin.changbaishan.utils.SPUtil;
 /**
  * Created by Txw on 2016/4/6.
  */
-public class MyApplication extends Application{
+public class MyApplication extends Application {
 
     private static final String TAG = "VolleyPatterns";
     private static final int TIMEOUTMS = 20 * 1000;
@@ -33,6 +33,7 @@ public class MyApplication extends Application{
 
     /**
      * 获取MyApplication实例
+     *
      * @return
      */
     public static MyApplication getInstance() {
@@ -55,6 +56,7 @@ public class MyApplication extends Application{
 
     /**
      * 获取当前实例的RequestQueues
+     *
      * @return
      */
     public RequestQueue getQueues() {
@@ -66,6 +68,7 @@ public class MyApplication extends Application{
 
     /**
      * 将request加入队列中
+     *
      * @param request
      * @param tag
      * @param <T>
@@ -84,6 +87,7 @@ public class MyApplication extends Application{
 
     /**
      * 取消队列中所有该Tag的request
+     *
      * @param tag
      */
     public void cancelPendingRequests(Object tag) {

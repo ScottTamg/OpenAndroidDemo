@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -18,68 +18,88 @@
             android:id="@+id/line"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/line_color" />
+            android:background="@color/line_color"/>
 
-        <RelativeLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/tab_bottom_bg_color"
-            android:gravity="center">
+            android:layout_height="50dp">
 
-            <RadioGroup
-                android:id="@+id/tabs_rg"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="8dp"
-                android:orientation="horizontal">
+                android:layout_height="50dp"
+                android:background="@color/tab_bottom_bg_color"
+                android:gravity="center">
 
-                <RadioButton
-                    android:id="@+id/tab_rb_jingxuan"
-                    android:layout_width="0dp"
+                <RadioGroup
+                    android:id="@+id/tabs_rg"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.0"
-                    android:background="@color/nocolor"
-                    android:button="@null"
-                    android:checked="true"
-                    android:drawableTop="@drawable/tab_home_selector"
-                    android:paddingTop="2dp"
-                    android:gravity="center"/>
-                    <!--android:text="@string/tab1"-->
-                    <!--android:textColor="@drawable/tab_tv_selector"-->
-                    <!--android:textSize="10sp" -->
+                    android:paddingTop="0dp"
+                    android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/tab_rb_touzi"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.0"
-                    android:background="@color/nocolor"
-                    android:button="@null"
-                    android:drawableTop="@drawable/tab_shopping_selector"
-                    android:gravity="center"
-                    android:paddingTop="2dp"
-                    android:checked="false" />
-                    <!--android:text="@string/tab2"-->
-                    <!--android:textColor="@drawable/tab_tv_selector"-->
-                    <!--android:textSize="10sp" -->
+                    <RadioButton
+                        android:id="@+id/tab_rb_jingxuan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:background="@color/nocolor"
+                        android:button="@null"
+                        android:checked="true"
+                        android:drawableTop="@drawable/tab_home_selector"
+                        android:paddingTop="2dp"
+                        android:gravity="center"
+                        android:text="@string/tab1"
+                        android:textColor="@drawable/tab_tv_selector"
+                        android:textSize="10sp"/>
 
-                <RadioButton
-                    android:id="@+id/tab_rb_zichan"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1.0"
-                    android:background="@color/nocolor"
-                    android:button="@null"
-                    android:drawableTop="@drawable/tab_account_selector"
-                    android:gravity="center"
-                    android:paddingTop="2dp"
-                    android:checked="false" />
-                    <!--android:text="@string/tab3"-->
-                    <!--android:textColor="@drawable/tab_tv_selector"-->
-                    <!--android:textSize="10sp" -->
+                    <RadioButton
+                        android:id="@+id/tab_rb_touzi"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:background="@color/nocolor"
+                        android:button="@null"
+                        android:drawableTop="@drawable/tab_shopping_selector"
+                        android:gravity="center"
+                        android:paddingTop="2dp"
+                        android:checked="false"
+                        android:text="@string/tab2"
+                        android:textColor="@drawable/tab_tv_selector"
+                        android:textSize="10sp"/>
 
-            </RadioGroup>
-        </RelativeLayout>
+                    <RadioButton
+                        android:id="@+id/tab_rb_zichan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:background="@color/nocolor"
+                        android:button="@null"
+                        android:drawableTop="@drawable/tab_account_selector"
+                        android:gravity="center"
+                        android:paddingTop="2dp"
+                        android:checked="false"
+                        android:text="@string/tab3"
+                        android:textColor="@drawable/tab_tv_selector"
+                        android:textSize="10sp"/>
+
+                </RadioGroup>
+            </RelativeLayout>
+
+            <com.anxin.changbaishan.widget.dragindicator.DragIndicatorView
+                android:id="@+id/indicator"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginLeft="24dp"
+                android:layout_marginBottom="12dp"
+                android:background="#ff0000"
+                android:padding="0dp"
+                android:text="99+"
+                android:textColor="#ffffff"
+                android:textSize="8sp"/>
+        </FrameLayout>
+
     </LinearLayout>
 
 </RelativeLayout>

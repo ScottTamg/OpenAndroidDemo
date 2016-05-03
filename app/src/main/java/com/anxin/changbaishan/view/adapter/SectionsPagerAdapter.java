@@ -17,6 +17,10 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     private static final int SHOPPINGCARTFRAGMENT = 1;
     private static final int ACCOUNTFRAGMENT = 2;
 
+    private HomeFragment mHomeFragment;
+    private ShoppingCartFragment mShoppingCartFragment;
+    private AccountFragment mAccountFragment;
+
     public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -27,13 +31,17 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // Return a PlaceholderFragment (defined as a static inner class below).
         switch (position) {
             case HOMEFRAGMENT:
-                return HomeFragment.newInstance("HomeFragment", position + "");
+                return mHomeFragment = (null == mHomeFragment) ? HomeFragment.newInstance("HomeFragment", position + "")
+                        : mHomeFragment;
             case SHOPPINGCARTFRAGMENT:
-                return ShoppingCartFragment.newInstance(1);
+                return mShoppingCartFragment = (null == mShoppingCartFragment) ? ShoppingCartFragment.newInstance(1)
+                        : mShoppingCartFragment;
             case ACCOUNTFRAGMENT:
-                return AccountFragment.newInstance("HomeFragment", position + "");
+                return mAccountFragment = (null == mAccountFragment) ? AccountFragment.newInstance("AccountFragment", position + "")
+                        : mAccountFragment;
             default:
-                return HomeFragment.newInstance("HomeFragment", position + "");
+                return mHomeFragment = (null == mHomeFragment) ? HomeFragment.newInstance("HomeFragment", position + "")
+                        : mHomeFragment;
         }
 
     }
@@ -55,5 +63,17 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return "SECTION 3";
         }
         return null;
+    }
+
+    public HomeFragment getHomeFragment() {
+        return mHomeFragment;
+    }
+
+    public ShoppingCartFragment getShoppingCartFragment() {
+        return mShoppingCartFragment;
+    }
+
+    public AccountFragment getAccountFragment() {
+        return mAccountFragment;
     }
 }

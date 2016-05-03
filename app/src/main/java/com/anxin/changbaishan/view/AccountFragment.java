@@ -1,14 +1,17 @@
 package com.anxin.changbaishan.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.InputFilter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.anxin.changbaishan.R;
 
@@ -31,6 +34,7 @@ public class AccountFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+    private Activity mActivity;
 
     public AccountFragment() {
         // Required empty public constructor
@@ -55,6 +59,12 @@ public class AccountFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        this.mActivity = activity;  //解决在“内存重启”之后调用GetActivity()方法报空指针异常
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
@@ -68,7 +78,7 @@ public class AccountFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_account, container, false);
-        Button loginBtn = (Button)view.findViewById(R.id.login_btn);
+        Button loginBtn = (Button) view.findViewById(R.id.login_btn);
         final Context context = getContext();
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,6 +87,23 @@ public class AccountFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        Button autograpBtn = (Button) view.findViewById(R.id.autograp_btn);
+        autograpBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, AutographActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        final EditText editText = (EditText)view.findViewById(R.id.et_maxmin);
+        InputFilterMinMax.InterfaceInputError inputError = new InputFilterMinMax.InterfaceInputError() {
+            @Override
+            public void InputError(int value) {
+                editText.setText(String.valueOf(value));
+            }
+        };
+        editText.setFilters(new InputFilter[] {new InputFilterMinMax(1, 99, inputError)});
         return view;
     }
 
@@ -109,7 +136,7 @@ public class AccountFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p/>
+     * <p>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.

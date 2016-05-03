@@ -10,7 +10,7 @@ import com.anxin.changbaishan.R;
 /**
  * Created by Txw on 2016/4/7.
  */
-public class CustomProgressDialog extends Dialog{
+public class CustomProgressDialog extends Dialog {
 
     private static CustomProgressDialog customProgressDialog = null;
 

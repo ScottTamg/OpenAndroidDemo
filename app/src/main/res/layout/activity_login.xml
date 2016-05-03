@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical">
 
     <include
         android:id="@+id/title"
         layout="@layout/layout_title_normal"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="50dp"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -29,14 +29,14 @@
                 android:id="@+id/line1"
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/line_color" />
+                android:background="@color/line_color"/>
 
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="17dp"
-                android:background="@color/line_color" />
+                android:background="@color/line_color"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -50,28 +50,28 @@
             <EditText
                 android:id="@+id/et_username"
                 style="@style/EditTextLine"
-                android:layout_marginTop="54dp"
                 android:layout_centerVertical="true"
+                android:layout_marginTop="54dp"
                 android:hint="手机号"
                 android:inputType="number"
-                android:maxLength="11" />
+                android:maxLength="11"/>
 
 
             <EditText
                 android:id="@+id/et_password"
                 style="@style/EditTextLine"
-                android:layout_marginTop="13dp"
                 android:layout_centerVertical="true"
+                android:layout_marginTop="13dp"
                 android:hint="密码"
                 android:inputType="textPassword"
-                android:maxLength="20" />
+                android:maxLength="20"/>
 
             <Button
                 android:id="@+id/btn_denglu"
                 style="@style/ButtonLine"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="13dp"
-                android:text="登录" />
+                android:text="登录"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -82,12 +82,12 @@
                     android:id="@+id/btn_zhuce"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
                     android:layout_gravity="right"
                     android:gravity="center"
                     android:text="注册"
                     android:textColor="@color/text_hui"
-                    android:layout_alignParentRight="true"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
 
                 <TextView
                     android:id="@+id/tv_forgetpwd"
@@ -96,7 +96,7 @@
                     android:layout_alignParentLeft="true"
                     android:text="忘记密码？"
                     android:textColor="@color/text_hui"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"/>
             </RelativeLayout>
 
         </LinearLayout>

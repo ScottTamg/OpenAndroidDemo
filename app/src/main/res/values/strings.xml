@@ -1,11 +1,16 @@
 <resources>
-    <string name="app_name">ChangBaiShan</string>
+    <string name="app_name">长白山</string>
 
     <string name="tab1">首页</string>
     <string name="tab2">购物车</string>
-    <string name="tab3">账户</string>
+    <string name="tab3">我的</string>
     <string name="hello_blank_fragment">hello fragment</string>
     <string name="title_activity_login">LoginActivity</string>
     <string name="login_text">天赐清新甘甜之水，源自大自然之水</string>
-
+    <!--footer-->
+    <string name="list_footer_loading">正在加载中…</string>
+    <string name="list_footer_network_error">点击重新加载</string>
+    <string name="list_footer_end">已经到底了</string>
+    <string name="header_text">The Header</string>
+    <string name="footer_text">The Footer</string>
 </resources>

@@ -23,7 +23,7 @@ import butterknife.OnClick;
 /**
  * Created by Txw on 2016/4/8.
  */
-public class RegisterActivity extends SwipeBackActivity implements View.OnClickListener{
+public class RegisterActivity extends SwipeBackActivity implements View.OnClickListener {
 
     @Bind(R.id.et_username)
     EditText etUsername;
