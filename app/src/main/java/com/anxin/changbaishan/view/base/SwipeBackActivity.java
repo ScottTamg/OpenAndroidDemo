@@ -5,6 +5,7 @@ package com.anxin.changbaishan.view.base;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -57,12 +58,9 @@ public class SwipeBackActivity extends BaseActivity implements SwipeBackActivity
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-//            finish();
-//            overridePendingTransition(R.anim.back_in, R.anim.back_out);
             Utils.convertActivityToTranslucent(this);
             getSwipeBackLayout().scrollToFinishActivity();
         }
-//        return super.onKeyDown(keyCode, event);
         return true;
     }
 
@@ -83,11 +81,14 @@ public class SwipeBackActivity extends BaseActivity implements SwipeBackActivity
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                finish();
-//                overridePendingTransition(R.anim.back_in, R.anim.back_out);
                 getSwipeBackLayout().scrollToFinishActivity();
             }
         });
     }
+
+    protected void setRight() {
+        Button right = (Button) findViewById(R.id.btn_right);
+        right.setVisibility(View.VISIBLE);
+    }
+
 }

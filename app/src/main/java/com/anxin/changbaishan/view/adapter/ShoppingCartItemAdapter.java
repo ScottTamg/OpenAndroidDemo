@@ -1,5 +1,6 @@
 package com.anxin.changbaishan.view.adapter;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.anxin.changbaishan.R;
-import com.anxin.changbaishan.view.ShoppingCartFragment.OnListFragmentInteractionListener;
+import com.anxin.changbaishan.entity.ProductEntity;
+import com.anxin.changbaishan.utils.ImageLoadUtil;
+import com.anxin.changbaishan.view.shopping.ShoppingCartFragment.OnListFragmentInteractionListener;
 import com.anxin.changbaishan.view.dummy.DummyContent.DummyItem;
 import com.anxin.changbaishan.widget.CustomNumberLayout;
 
@@ -25,18 +28,21 @@ import butterknife.ButterKnife;
  */
 public class ShoppingCartItemAdapter extends RecyclerView.Adapter<ShoppingCartItemAdapter.ViewHolder> {
     private OnListFragmentInteractionListener mListener;
-    private List<DummyItem> mDummyItems;
+    private List<ProductEntity.DataBean.ListBean> mDummyItems;
+    private Fragment mFragment;
 
-    public ShoppingCartItemAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public ShoppingCartItemAdapter(Fragment fragment, List<ProductEntity.DataBean.ListBean> items
+            , OnListFragmentInteractionListener listener) {
+        this.mFragment = fragment;
         mDummyItems = items;
         mListener = listener;
     }
 
-    public List<DummyItem> getDummyItems() {
+    public List<ProductEntity.DataBean.ListBean> getDummyItems() {
         return mDummyItems;
     }
 
-    public void setDummyItems(List<DummyItem> dummyItems) {
+    public void setDummyItems(List<ProductEntity.DataBean.ListBean> dummyItems) {
         mDummyItems = dummyItems;
     }
 
@@ -50,18 +56,22 @@ public class ShoppingCartItemAdapter extends RecyclerView.Adapter<ShoppingCartIt
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.mItem = mDummyItems.get(position);
-        holder.mTvTitle.setText(mDummyItems.get(position).id);
-        holder.mTvContent.setText(mDummyItems.get(position).content);
-        holder.mLtNum.setCurrentNum(Integer.valueOf(mDummyItems.get(position).number));
+        holder.mTvTitle.setText(mDummyItems.get(position).getName());
+        holder.mTvStandard.setText("规格：" + mDummyItems.get(position).getStandard());
+        final float price = Float.valueOf(mDummyItems.get(position).getSellPrice());
+        int num = Integer.valueOf(mDummyItems.get(position).getCount());
+        ImageLoadUtil.loadImage(mFragment, mDummyItems.get(position).getPhoto(), holder.mImgIcon);
+        holder.mTvMoney.setText("￥：" + (price * num));
+        holder.mLtNum.setCurrentNum(num);
         holder.mLtNum.setTextChangedListener(new CustomNumberLayout.TextChangedListener() {
             @Override
             public void onTextChangedInteraction(int value) {
-                holder.mTvMoney.setText(String.valueOf(value));
-                holder.mItem.number = value;
+                holder.mTvMoney.setText("￥：" + (price * value));
+                holder.mItem.setCount(value);
                 mListener.onNumberChangedInteraction(holder.mItem);
             }
         });
-        holder.mCheckBox.setChecked(mDummyItems.get(position).isChecked);
+        holder.mCheckBox.setChecked(mDummyItems.get(position).getChecked());
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,10 +97,10 @@ public class ShoppingCartItemAdapter extends RecyclerView.Adapter<ShoppingCartIt
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-                    boolean flag = ((CheckBox)v).isChecked();
-                    holder.mItem.isChecked = flag;
+                    boolean flag = ((CheckBox) v).isChecked();
+                    holder.mItem.setChecked(flag);
                     mListener.onCheckedItemInteraction(holder.mItem);
-                    mDummyItems.get(position).isChecked = flag;
+                    mDummyItems.get(position).setChecked(flag);
                     notifyItemChanged(position);
                 }
             }
@@ -106,8 +116,8 @@ public class ShoppingCartItemAdapter extends RecyclerView.Adapter<ShoppingCartIt
 
         @Bind(R.id.tv_title)
         TextView mTvTitle;
-        @Bind(R.id.tv_content)
-        TextView mTvContent;
+        @Bind(R.id.tv_standard)
+        TextView mTvStandard;
         @Bind(R.id.img_icon)
         ImageView mImgIcon;
         @Bind(R.id.img_out_of_stock)
@@ -122,7 +132,7 @@ public class ShoppingCartItemAdapter extends RecyclerView.Adapter<ShoppingCartIt
         CustomNumberLayout mLtNum;
 
         public final View mView;
-        public DummyItem mItem;
+        public ProductEntity.DataBean.ListBean mItem;
 
         public ViewHolder(View view) {
             super(view);

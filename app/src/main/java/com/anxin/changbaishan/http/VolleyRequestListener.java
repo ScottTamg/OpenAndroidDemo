@@ -11,14 +11,18 @@ public abstract class VolleyRequestListener {
     private static Response.Listener mListener;
     private static Response.ErrorListener mErrorListener;
 
-    public abstract void success(boolean isSuccess, String request, String error);
+    public abstract void success(boolean isSuccess, String response, String error);
 
     public Response.Listener<String> onSuccess() {
         mListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 //请求成功，返回data
-                success(true, response, null);
+                if (null != response && !"".equals(response)) {
+                    success(true, response, null);
+                } else {
+                    success(false, null, "response is empty");
+                }
             }
         };
         return mListener;

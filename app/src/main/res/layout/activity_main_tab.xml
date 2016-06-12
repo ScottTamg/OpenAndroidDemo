@@ -27,7 +27,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@color/tab_bottom_bg_color"
+                android:background="@color/white"
                 android:gravity="center">
 
                 <RadioGroup
@@ -38,7 +38,7 @@
                     android:orientation="horizontal">
 
                     <RadioButton
-                        android:id="@+id/tab_rb_jingxuan"
+                        android:id="@+id/tab_rb_hone"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.0"
@@ -53,7 +53,7 @@
                         android:textSize="10sp"/>
 
                     <RadioButton
-                        android:id="@+id/tab_rb_touzi"
+                        android:id="@+id/tab_rb_shoppingcart"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.0"
@@ -68,7 +68,7 @@
                         android:textSize="10sp"/>
 
                     <RadioButton
-                        android:id="@+id/tab_rb_zichan"
+                        android:id="@+id/tab_rb_account"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.0"

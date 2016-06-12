@@ -1,16 +1,21 @@
 package com.anxin.changbaishan.view.adapter;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.anxin.changbaishan.R;
-import com.anxin.changbaishan.view.HomeFragment;
-import com.anxin.changbaishan.view.HomeFragment.OnListHomeFragmentInteractionListener;
-import com.anxin.changbaishan.view.dummy.DummyContent.DummyItem;
+import com.anxin.changbaishan.entity.ProductEntity;
+import com.anxin.changbaishan.utils.ImageLoadUtil;
+import com.anxin.changbaishan.view.home.HomeFragment;
+import com.anxin.changbaishan.view.home.HomeFragment.OnListHomeFragmentInteractionListener;
 
 import java.util.List;
 
@@ -22,10 +27,12 @@ import butterknife.ButterKnife;
  */
 public class RCYProductItemAdapter extends RecyclerView.Adapter<RCYProductItemAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<ProductEntity.DataBean.ListBean> mValues;
     private final HomeFragment.OnListHomeFragmentInteractionListener mListener;
+    private Context mContext;
 
-    public RCYProductItemAdapter(List<DummyItem> items, OnListHomeFragmentInteractionListener listener) {
+    public RCYProductItemAdapter(Context context, List<ProductEntity.DataBean.ListBean> items, OnListHomeFragmentInteractionListener listener) {
+        this.mContext = context;
         this.mValues = items;
         this.mListener = listener;
     }
@@ -40,14 +47,22 @@ public class RCYProductItemAdapter extends RecyclerView.Adapter<RCYProductItemAd
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.tvTitle.setText(mValues.get(position).id);
-        holder.tvContent.setText(mValues.get(position).content);
-        holder.tvMoney.setText(mValues.get(position).content);
+        holder.tvTitle.setText(Html.fromHtml(mValues.get(position).getName()
+                + "<font color='#999999'>" + mValues.get(position).getSummary()
+                + "</font>"));
+//        holder.tvContent.setText(mValues.get(position).getSummary());
+        holder.tvStandard.setText("规格：" + mValues.get(position).getStandard());
+        holder.tvMoney.setText("￥：" + mValues.get(position).getSellPrice());
+        ImageLoadUtil.loadImage(mContext, mValues.get(position).getPhoto(), holder.imgIcon);
+
         holder.imgAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-                    mListener.onListHomeFragmentInteraction(holder.mItem);
+                    int[] location = new int[2];
+                    holder.imgIcon.getLocationInWindow(location);
+                    Drawable drawable = holder.imgIcon.getDrawable();
+                    mListener.onListHomeFragmentInteraction(holder.mItem, drawable, location);
                 }
             }
         });
@@ -65,14 +80,16 @@ public class RCYProductItemAdapter extends RecyclerView.Adapter<RCYProductItemAd
         ImageView imgIcon;
         @Bind(R.id.img_out_of_stock)
         ImageView imgOutOfStock;
-        @Bind(R.id.tv_content)
+        @Bind(R.id.tv_count)
         TextView tvContent;
+        @Bind(R.id.tv_standard)
+        TextView tvStandard;
         @Bind(R.id.tv_money)
         TextView tvMoney;
         @Bind(R.id.img_add)
-        ImageView imgAdd;
+        Button imgAdd;
 
-        public DummyItem mItem;
+        public ProductEntity.DataBean.ListBean mItem;
 
         public ViewHolder(View itemView) {
             super(itemView);

@@ -2,17 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.anxin.changbaishan">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="ANDROID.PERMISSION.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
-        android:name=".view.MyApplication"
+        android:name=".view.base.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="${UMENG_CHANNEL_VALUE}"/>
+
         <activity
             android:name=".view.MainTabActivity"
             android:screenOrientation="portrait"
@@ -40,8 +46,92 @@
             android:name=".view.AutographActivity"
             android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme"/>
-        <activity android:name=".view.MyOrderActivity">
-        </activity>
+        <activity
+            android:name=".view.shopping.MyOrderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"/>
+        <activity
+            android:name=".view.home.LoationActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"/>
+        <activity
+            android:name=".view.account.address.AddAddressActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"/>
+        <activity
+            android:name=".view.account.address.ShippingAddressActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"/>
+        <activity
+            android:name=".view.shopping.SelectPaymentMethodActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"/>
+        <activity
+            android:name=".view.account.order.OrderActivity"
+            android:label="@string/title_activity_order"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"/>
+        <activity
+            android:name=".view.account.address.EditAddressActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"/>
+        <activity
+            android:name=".view.account.order.OrderDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"/>
+        <activity
+            android:name=".view.account.deliver.DeliverWaterActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"/>
+        <activity
+            android:name=".view.account.address.SelectAddressActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"/>
+        <activity
+            android:name=".view.account.deliver.DeliveryListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"/>
+        <activity
+            android:name=".view.account.deliver.DeliverCommentActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"/>
+        <activity
+            android:name=".view.account.deliver.DeliverDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"/>
+        <activity
+            android:name=".view.account.bonuspoints.BonusPointsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"
+            android:label="@string/title_activity_bonus_points"/>
+        <activity
+            android:name=".view.account.friend.SendFriendActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"/>
+        <activity
+            android:name=".view.account.friend.SendFriendOrderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"/>
+        <activity
+            android:name=".view.account.friend.CreatFriendOrderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"/>
+        <activity
+            android:name=".view.account.friend.GiveToMeOrderActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"/>
+        <activity
+            android:name=".view.account.friend.FriendOrderDetailsActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"/>
+        <activity
+            android:name=".view.account.AccountActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"/>
+        <activity
+            android:name=".view.account.ShareActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme"/>
     </application>
 
 </manifest>

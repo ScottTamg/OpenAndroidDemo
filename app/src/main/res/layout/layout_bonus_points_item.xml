@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin">
+
+    <TextView
+        style="@style/CustomTextStyle"
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:text="title"
+        android:layout_alignTop="@+id/view2"
+        android:layout_toRightOf="@+id/img_icon"
+        android:layout_toEndOf="@+id/img_icon"/>
+
+    <TextView
+        style="@style/CustomTextStyle"
+        android:id="@+id/tv_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="count"
+        android:textColor="@color/black_999"
+        android:layout_alignBottom="@+id/img_out_of_stock"
+        android:layout_alignRight="@+id/tv_money"
+        android:layout_alignEnd="@+id/tv_money"/>
+
+    <ImageView
+        style="@style/IconImage"
+        android:id="@+id/img_icon"
+        android:padding="@dimen/dp_5"
+        android:background="@drawable/edit_bg"
+        android:layout_alignTop="@+id/view2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <TextView
+        style="@style/CustomTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_bg"
+        android:layout_marginTop="@dimen/dp_5"
+        android:padding="2dp"
+        android:text="规格："
+        android:textColor="@color/black_999"
+        android:id="@+id/tv_standard"
+        android:layout_below="@+id/tv_title"
+        android:layout_alignLeft="@+id/tv_title"
+        android:layout_alignStart="@+id/tv_title"/>
+
+    <TextView
+        style="@style/CustomTextStyle"
+        android:id="@+id/tv_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_10"
+        android:text="￥：元"
+        android:textStyle="bold"
+        android:layout_below="@+id/tv_count"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"/>
+
+</RelativeLayout>

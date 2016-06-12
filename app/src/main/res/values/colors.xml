@@ -6,16 +6,22 @@
     <color name="line_color">#E7E7E7</color>
     <color name="tab_bottom_bg_color">#F0F0F0</color>
     <color name="nocolor">#00000000</color>
-    <color name="black">#FFFFFF</color>
+    <color name="green">#00A05A</color>
     <color name="tab_bottom_tv">#F2602D</color>
     <color name="tab_tv_color_night">#888888</color>
     <color name="white">#ffffff</color>
     <color name="tv_huise">#A1A1A1</color>
     <color name="tv_black">#B7B7B7</color>
     <color name="text_hui">#282622</color>
-    <color name="text_back">#292423</color>
+    <color name="black_666">#666666</color>
+    <color name="black_333">#333333</color>
+    <color name="black_999">#999999</color>
     <color name="toastback">#98000000</color>
     <color name="rl_item_pressed">#FBFBFB</color>
     <color name="readtitle">#848484</color>
     <color name="color_00">#8A000000</color>
+    <color name="default_red">#E94653</color>
+    <color name="divider_gray">#86f2f2f2</color>
+    <color name="bg_gray">#4bf7f7f7</color>
+
 </resources>

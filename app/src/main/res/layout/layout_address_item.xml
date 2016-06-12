@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
+
+    <TextView
+        style="@style/CustomTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:id="@+id/tv_name"/>
+
+    <TextView
+        style="@style/CustomTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone"
+        android:layout_marginLeft="20dp"
+        android:id="@+id/tv_phone"
+        android:layout_toRightOf="@+id/tv_name"
+        android:layout_toEndOf="@+id/tv_name"/>
+
+    <TextView
+        style="@style/CustomTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address"
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_address"
+        android:layout_below="@+id/tv_name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_gray"
+        android:layout_marginTop="10dp"
+        android:id="@+id/view5"
+        android:layout_below="@+id/tv_address"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/view5"
+        android:layout_alignLeft="@+id/view5"
+        android:layout_alignStart="@+id/view5">
+
+        <RadioButton
+            style="@style/CustomCheckBok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:text="设为默认"
+            android:textColor="@color/black_333"
+            android:textSize="12dp"
+            android:paddingLeft="@dimen/dp_5"
+            android:gravity="center_vertical"
+            android:layout_centerVertical="true"
+            android:id="@+id/rb_default"/>
+
+        <TextView
+            style="@style/CustomTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/delete"
+            android:drawablePadding="5dp"
+            android:text="删除"
+            android:textColor="#666666"
+            android:id="@+id/tv_delete"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
+
+        <TextView
+            style="@style/CustomTextStyle"
+            android:id="@+id/tv_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/edit"
+            android:drawablePadding="5dp"
+            android:paddingRight="20dp"
+            android:text="编辑"
+            android:textColor="#666666"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/tv_delete"
+            android:layout_toStartOf="@+id/tv_delete"/>
+    </RelativeLayout>
+</RelativeLayout>

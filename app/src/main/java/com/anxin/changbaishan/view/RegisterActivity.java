@@ -1,16 +1,18 @@
 package com.anxin.changbaishan.view;
 
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anxin.changbaishan.R;
+import com.anxin.changbaishan.entity.BaseEntity;
+import com.anxin.changbaishan.entity.LoginEntity;
+import com.anxin.changbaishan.http.VolleyRequest;
+import com.anxin.changbaishan.http.VolleyRequestListener;
 import com.anxin.changbaishan.utils.PhoneUtils;
-import com.anxin.changbaishan.utils.RSAUtil;
+import com.anxin.changbaishan.utils.SPUtil;
 import com.anxin.changbaishan.view.base.SwipeBackActivity;
 
 import java.io.UnsupportedEncodingException;
@@ -31,20 +33,11 @@ public class RegisterActivity extends SwipeBackActivity implements View.OnClickL
     EditText etVerificationCode;
     @Bind(R.id.btn_verification_code)
     Button btnVerificationCode;
-    @Bind(R.id.et_password)
-    EditText etPassword;
-    @Bind(R.id.et_address)
-    EditText etAddress;
-    @Bind(R.id.tv_user_agreement)
-    TextView tvUserAgreement;
     @Bind(R.id.btn_register)
     Button btnRegister;
 
     private String phoneNum;
-    private String pwd;
-    private String encryptPassword;
     private String smsnum;
-    private String mToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,62 +49,36 @@ public class RegisterActivity extends SwipeBackActivity implements View.OnClickL
         setBack();
     }
 
-    @OnClick({R.id.btn_verification_code, R.id.tv_user_agreement, R.id.btn_register})
+    @OnClick({R.id.btn_verification_code, R.id.btn_register})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_verification_code:
                 phoneNum = etUsername.getText().toString();//手机号码
-                pwd = etPassword.getText().toString();//密码
                 if ("".equals(phoneNum)) {
                     Toast.makeText(this, "请输入手机号码", Toast.LENGTH_SHORT).show();
                 }
-                /*else if ("".equals(pwd)) {
-                    Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
-                } else if (pwd.length() < 6) {
-                    Toast.makeText(this, "密码长度不能小于6位", Toast.LENGTH_SHORT).show();
-                } else if (pwd.length() > 16) {
-                    Toast.makeText(this, "密码长度不能大于16位", Toast.LENGTH_SHORT).show();
-                }*/
                 else {
                     if (PhoneUtils.isMobileNO(phoneNum)) {
                         //获取短信验证码
                         startProgressDialog();
-                        getMyToken();
+                        getSMSCode();
                     } else {
                         Toast.makeText(this, "请检查手机号码是否正确", Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;
-            case R.id.tv_user_agreement:
-                showShortToast("用户协议");
-                break;
             case R.id.btn_register:
                 //校验手机号和短信验证码
                 phoneNum = etUsername.getText().toString();
-                pwd = etPassword.getText().toString();
                 smsnum = etVerificationCode.getText().toString();
                 if ("".equals(phoneNum)) {
                     Toast.makeText(this, "请输入手机号码", Toast.LENGTH_SHORT).show();
-                } else if ("".equals(pwd)) {
-                    Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
-                } else if (pwd.length() < 6) {
-                    Toast.makeText(this, "密码长度不能小于6位", Toast.LENGTH_SHORT).show();
-                } else if (pwd.length() > 16) {
-                    Toast.makeText(this, "密码长度不能大于16位", Toast.LENGTH_SHORT).show();
                 } else if ("".equals(smsnum)) {
                     Toast.makeText(this, "请输入短信验证码", Toast.LENGTH_SHORT).show();
                 } else {
                     if (PhoneUtils.isMobileNO(phoneNum)) {
                         //请求注册接口
                         startProgressDialog();
-
-                        //密码加密
-                        byte[] encryptByte = RSAUtil.encryptData(pwd.getBytes());
-                        try {
-                            encryptPassword = URLEncoder.encode(Base64.encodeToString(encryptByte, Base64.DEFAULT), "utf-8");
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
-                        }
                         regUser();
                     } else {
                         Toast.makeText(this, "请检查手机号码是否正确", Toast.LENGTH_SHORT).show();
@@ -122,9 +89,62 @@ public class RegisterActivity extends SwipeBackActivity implements View.OnClickL
     }
 
     private void regUser() {
+        VolleyRequest.login(phoneNum, smsnum, "Login", new VolleyRequestListener() {
+            @Override
+            public void success(boolean isSuccess, String response, String error) {
+                if (isSuccess) {
+                    LoginEntity entity = loadDataUtil.getJsonData(response, LoginEntity.class);
+                    if (0 == entity.getErrorNo()) {
+                        showShortToast("登录成功");
+                        try {
+                            spUtil.put(SPUtil.ATOKEN,
+                                    URLEncoder.encode(entity.getData().getAtoken(), "utf-8"));
+                            spUtil.put(SPUtil.USER_MOBILE_PHONE, phoneNum);
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                        scrollToFinishActivity();
+                    } else if (-99 == entity.getErrorNo()) {
+                        spUtil.put(SPUtil.TOKEN, "");
+                        regUser();
+                    } else {
+                        showShortToast("失败：" + error);
+                    }
+                } else {
+                    showShortToast(error);
+                }
+                stopProgressDialog();
+            }
+        });
     }
 
-    private void getMyToken() {
+    private void getSMSCode() {
+        /*VolleyRequest.getToken("token", new VolleyRequestListener() {
+            @Override
+            public void success(boolean isSuccess, String response, String error) {
+                if (isSuccess) {}
+                stopProgressDialog();
+            }
+        });*/
 
+        VolleyRequest.sendVerifyCodeSms(phoneNum, "SMSCode", new VolleyRequestListener() {
+            @Override
+            public void success(boolean isSuccess, String response, String error) {
+                if (isSuccess) {
+                    BaseEntity entity = loadDataUtil.getJsonData(response, BaseEntity.class);
+                    if (0 == entity.getErrorNo()) {
+                        showShortToast("短信验证码已发送");
+                    } else if (-99 == entity.getErrorNo()) {
+                        spUtil.put(SPUtil.TOKEN, "");
+                        getSMSCode();
+                    } else {
+                        showShortToast("发送失败：" + error);
+                    }
+                } else {
+                    showShortToast(error);
+                }
+                stopProgressDialog();
+            }
+        });
     }
 }

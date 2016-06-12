@@ -18,6 +18,7 @@
         android:layout_gravity="center"/>
 
     <Button
+        style="?android:attr/borderlessButtonStyle"
         android:id="@+id/btn_sign"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

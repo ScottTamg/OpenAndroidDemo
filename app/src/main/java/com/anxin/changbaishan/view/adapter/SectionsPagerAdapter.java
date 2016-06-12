@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.anxin.changbaishan.view.AccountFragment;
-import com.anxin.changbaishan.view.HomeFragment;
-import com.anxin.changbaishan.view.ShoppingCartFragment;
+import com.anxin.changbaishan.view.account.AccountFragment;
+import com.anxin.changbaishan.view.home.HomeFragment;
+import com.anxin.changbaishan.view.shopping.ShoppingCartFragment;
 
 /**
  * Created by Txw on 2016/4/5.

@@ -112,7 +112,7 @@ public class HeaderAndFooterRecyclerViewAdapter extends RecyclerView.Adapter<Rec
     }
 
     /**
-     * 返回第一个FoView
+     * 返回第一个FooterView
      * @return
      */
     public View getFooterView() {

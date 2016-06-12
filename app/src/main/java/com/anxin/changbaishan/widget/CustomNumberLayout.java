@@ -8,7 +8,6 @@ import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.anxin.changbaishan.R;
-import com.anxin.changbaishan.view.InputFilterMinMax;
+import com.anxin.changbaishan.utils.InputFilterMinMax;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -73,7 +72,6 @@ public class CustomNumberLayout extends LinearLayout {
             public void InputError(int value) {
                 mEditText.setText(String.valueOf(value));
                 currentNum = value;
-                Log.e("InputError", String.valueOf(value));
             }
         };
         mEditText.setFilters(new InputFilter[] {new InputFilterMinMax(minNum, maxNum, inputError)});
@@ -166,7 +164,7 @@ public class CustomNumberLayout extends LinearLayout {
     }
 
     private void showToast(String message) {
-        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
     }
 
     public interface TextChangedListener {

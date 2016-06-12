@@ -23,7 +23,7 @@ public class CustomProgressDialog extends Dialog {
     }
 
     public static CustomProgressDialog createDialog(Context context) {
-        customProgressDialog = new CustomProgressDialog(context, R.style.CustomProgressDialog);
+        customProgressDialog = new CustomProgressDialog(context, R.style.CustomDialog);
         customProgressDialog.setContentView(R.layout.custom_progress_dialog);
         customProgressDialog.getWindow().getAttributes().gravity = Gravity.CENTER;
         customProgressDialog.setCanceledOnTouchOutside(false);

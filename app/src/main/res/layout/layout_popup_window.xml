@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#e9e9e9"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/CustomTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/share_sina_icon"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/black_666"
+            android:text="积分"/>
+
+        <TextView
+            style="@style/CustomTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/share_weibo_icon"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/black_666"
+            android:text="积分"/>
+
+        <TextView
+            style="@style/CustomTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/share_qzone_icon"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/black_666"
+            android:text="积分"/>
+
+        <TextView
+            style="@style/CustomTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/share_qq_icon"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/black_666"
+            android:text="积分"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/CustomTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/share_weixin_icon"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/black_666"
+            android:text="积分"/>
+
+        <TextView
+            style="@style/CustomTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/share_friends_icon"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/black_666"
+            android:text="积分"/>
+
+        <TextView
+            style="@style/CustomTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/order_3"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/black_666"
+            android:visibility="invisible"
+            android:text="@null"/>
+
+        <TextView
+            style="@style/CustomTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/order_3"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/black_666"
+            android:visibility="invisible"
+            android:text="@null"/>
+
+    </LinearLayout>
+
+</LinearLayout>

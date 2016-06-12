@@ -79,7 +79,7 @@
              will display items of varying heights. When this property is set to true and
              your adapter displays items of varying heights, the scrollbar thumb will
              change size as the user scrolls through the list. When set to fale, the list
-             will use only the number of items in the adapter and the number of items visible
+             will use only the count of items in the adapter and the count of items visible
              on screen to determine the scrollbar's properties.
         -->
         <attr name="android:smoothScrollbar" />
@@ -87,9 +87,9 @@
              Defines the choice behavior for the view. By default, lists do not have
              any choice behavior. By setting the choiceMode to singleChoice, the list
              allows up to one item to be in a chosen state. By setting the choiceMode to
-             multipleChoice, the list allows any number of items to be chosen.
+             multipleChoice, the list allows any count of items to be chosen.
              Finally, by setting the choiceMode to multipleChoiceModal the list allows
-             any number of items to be chosen in a special selection mode.
+             any count of items to be chosen in a special selection mode.
              The application will supply a
              {@link android.widget.AbsListView.MultiChoiceModeListener} using
              {@link android.widget.AbsListView#setMultiChoiceModeListener} to control the
@@ -97,6 +97,30 @@
         -->
         <attr name="android:choiceMode" />
 
+    </declare-styleable>
+
+    <declare-styleable name="SwitchButton">
+        <attr name="onDrawable" format="reference" />
+        <attr name="offDrawable" format="reference" />
+        <attr name="thumbDrawable" format="reference" />
+        <attr name="thumb_margin" format="dimension|reference" />
+        <attr name="thumb_marginTop" format="dimension|reference" />
+        <attr name="thumb_marginBottom" format="dimension|reference" />
+        <attr name="thumb_marginLeft" format="dimension|reference" />
+        <attr name="thumb_marginRight" format="dimension|reference" />
+        <attr name="thumb_width" format="dimension|reference" />
+        <attr name="thumb_height" format="dimension|reference" />
+        <attr name="onColor" format="color|reference" />
+        <attr name="offColor" format="color|reference" />
+        <attr name="thumbColor" format="color|reference" />
+        <attr name="thumbPressedColor" format="color|reference" />
+        <attr name="animationVelocity" format="integer" />
+        <attr name="switchRadius" format="integer" />
+        <attr name="measureFactor" format="float" />
+        <attr name="insetLeft" format="dimension|reference" />
+        <attr name="insetRight" format="dimension|reference" />
+        <attr name="insetTop" format="dimension|reference" />
+        <attr name="insetBottom" format="dimension|reference" />
     </declare-styleable>
 
     <declare-styleable name="CustomNumberLayout">

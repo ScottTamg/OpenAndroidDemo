@@ -9,12 +9,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anxin.changbaishan.R;
-import com.anxin.changbaishan.http.VolleyRequest;
-import com.anxin.changbaishan.http.VolleyRequestListener;
 import com.anxin.changbaishan.utils.RSAUtil;
-import com.anxin.changbaishan.utils.SPUtil;
 import com.anxin.changbaishan.view.base.SwipeBackActivity;
-import com.anxin.changbaishan.widget.CustomAlertDialog;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -72,7 +68,7 @@ public class LoginActivity extends SwipeBackActivity implements View.OnClickList
                 } else {
                     //访问接口
                     startProgressDialog();
-                    login();
+//                    login();
                 }
                 break;
             case R.id.btn_zhuce:
@@ -82,61 +78,6 @@ public class LoginActivity extends SwipeBackActivity implements View.OnClickList
                 startAnimActivity(ForgetPasswordActivity.class);
                 break;
         }
-    }
-
-    private void login() {
-        VolleyRequest.login((String) spUtil.get(SPUtil.TOKEN, ""), codeUserName, encryptPassword, this.getClass().getName(), new VolleyRequestListener() {
-            @Override
-            public void success(boolean isSuccess, String request, String error) {
-                CustomAlertDialog dialog;
-                stopProgressDialog();
-                /*if (isSuccess) {
-                    DengLuEntity entity = loadDataUtils.getJsonData(request, DengLuEntity.class);
-
-                    if (0 == (entity.getErrorNo()) && entity != null) {
-                        //登录成功
-                        if (entity.getData() != null) {
-                            try {
-                                spUtil.saveToSp(SPUtil.ATOKEN, URLEncoder.encode(entity.getData().getAtoken(), "utf-8"));
-                            } catch (UnsupportedEncodingException e) {
-                                e.printStackTrace();
-                            }
-                            spUtil.saveToSp(SPUtil.ISDENGLU, true);
-                            finish();
-                            //设置手势密码
-                            // TODO: 2015/11/9  txw 存在登录成功后页面跳转混乱
-                            if (spUtil.getFromSp(SPUtil.ISGESTURE, false)) {
-                                startAnimActivity(LockPatternCreatActivity.class);
-                            } else {
-                                startAnimActivity(MainTabActivity.class);
-                            }
-
-                        } else {
-                            dialog = new MyAlertDialog(GengDuo_DengLu_Activity.this, "确定", entity.getMessage());
-                        }
-
-
-                    } else if (-99 == (entity.getErrorNo())) {
-                        spUtil.saveToSp(SPUtil.TOKEN, "");
-                        login();
-                    } else {
-                        if ("此用户不存在".equals(entity.getMessage())) {
-                            MyAlertDialog.InterfaceConfirm confirm = new MyAlertDialog.InterfaceConfirm() {
-                                @Override
-                                public void confirm() {
-                                    startAnimActivity(GengDuo_ZhuCe_Activity.class);
-                                }
-                            };
-                            dialog = new MyAlertDialog(GengDuo_DengLu_Activity.this, "注册", entity.getMessage(), confirm);
-                        } else {
-                            dialog = new MyAlertDialog(GengDuo_DengLu_Activity.this, "确定", entity.getMessage());
-                        }
-                    }
-                } else {
-                    dialog = new MyAlertDialog(GengDuo_DengLu_Activity.this, "确定", error);
-                }*/
-            }
-        });
     }
 
 

@@ -44,7 +44,7 @@
                 android:layout_marginTop="18dp"
                 android:gravity="center"
                 android:text="@string/login_text"
-                android:textColor="@color/text_back"
+                android:textColor="@color/black_333"
                 android:textSize="16sp"/>
 
             <EditText

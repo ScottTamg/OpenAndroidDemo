@@ -10,7 +10,6 @@ import android.widget.Toast;
 import com.anxin.changbaishan.R;
 import com.anxin.changbaishan.utils.LoadDataUtil;
 import com.anxin.changbaishan.utils.SPUtil;
-import com.anxin.changbaishan.view.MyApplication;
 import com.anxin.changbaishan.widget.CustomProgressDialog;
 
 /**
@@ -26,8 +25,8 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     protected Activity mActivity;
-    protected SPUtil spUtil;
-    protected LoadDataUtil loadDataUtil;
+    public SPUtil spUtil;
+    public LoadDataUtil loadDataUtil;
 
     private CustomProgressDialog progressDialog;
     //Activity状态
@@ -78,7 +77,7 @@ public class BaseActivity extends AppCompatActivity {
         KJActivityStack.create().finishActivity(this);
     }
 
-    protected void startProgressDialog() {
+    public void startProgressDialog() {
         if (progressDialog == null) {
             progressDialog = CustomProgressDialog.createDialog(this);
         }
@@ -86,24 +85,24 @@ public class BaseActivity extends AppCompatActivity {
         progressDialog.show();
     }
 
-    protected void stopProgressDialog() {
+    public void stopProgressDialog() {
         if (progressDialog != null) {
             progressDialog.dismiss();
             progressDialog = null;
         }
     }
 
-    protected void startAnimActivity(Class<?> mClass) {
+    public void startAnimActivity(Class<?> mClass) {
         startMyActivity(mClass);
         overridePendingTransition(R.anim.main_in, R.anim.main_out);
     }
 
-    protected void startAnimActivity(Class<?> mClass, Bundle mBundle) {
+    public void startAnimActivity(Class<?> mClass, Bundle mBundle) {
         startMyActivity(mClass, mBundle);
         overridePendingTransition(R.anim.main_in, R.anim.main_out);
     }
 
-    private void startMyActivity(Class<?> mClass, Bundle mBundle) {
+    protected void startMyActivity(Class<?> mClass, Bundle mBundle) {
         Intent intent = new Intent(this, mClass);
         if (mBundle != null) {
             intent.putExtras(mBundle);
@@ -111,11 +110,11 @@ public class BaseActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void startMyActivity(Class<?> mClass) {
+    protected void startMyActivity(Class<?> mClass) {
         startMyActivity(mClass, null);
     }
 
-    protected void showLongToast(String pMsg) {
+    public void showLongToast(String pMsg) {
         Toast.makeText(this, pMsg, Toast.LENGTH_LONG).show();
 //        ToastView toastView = new ToastView(this, Gravity.BOTTOM, false, pMsg, null);
 //        toastView.showLong();

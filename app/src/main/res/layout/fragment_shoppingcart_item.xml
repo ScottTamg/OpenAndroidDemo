@@ -1,9 +1,12 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:paddingRight="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_vertical_margin">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,25 +17,18 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
             android:text="title"
+            android:textColor="@color/black_333"
+            android:textSize="@dimen/sp_12"
             android:layout_alignTop="@+id/img_icon"
             android:layout_toRightOf="@+id/img_icon"
             android:layout_toEndOf="@+id/img_icon"/>
 
-        <TextView
-            android:id="@+id/tv_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="content"
-            android:textColor="#A4A4A4"
-            android:layout_below="@+id/tv_title"
-            android:layout_toRightOf="@+id/img_icon"
-            android:layout_toEndOf="@+id/img_icon"/>
-
         <ImageView
+            style="@style/IconImage"
             android:id="@+id/img_icon"
-            android:layout_width="100dp"
-            android:layout_height="60dp"
+            android:layout_marginLeft="@dimen/dp_10"
             android:src="@drawable/home_selected"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/checkBox"
@@ -43,19 +39,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/outofstock"
-            android:layout_above="@+id/textView"
+            android:visibility="gone"
             android:layout_alignLeft="@+id/img_icon"
-            android:layout_alignStart="@+id/img_icon"/>
+            android:layout_alignTop="@+id/img_icon"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="规格："
-            android:textColor="#5B5859"
-            android:id="@+id/textView"
-            android:layout_below="@+id/tv_content"
-            android:layout_toRightOf="@+id/img_icon"
-            android:layout_toEndOf="@+id/img_icon"/>
+            android:textColor="@color/black_999"
+            android:textSize="@dimen/sp_12"
+            android:id="@+id/tv_standard"
+            android:layout_below="@+id/tv_title"
+            android:layout_alignLeft="@+id/tv_title"
+            android:layout_alignStart="@+id/tv_title"/>
 
         <ImageView
             android:id="@+id/img_delete"
@@ -63,11 +60,12 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:src="@drawable/delete"
-            android:layout_centerVertical="true"
+            android:layout_alignTop="@+id/lt_num"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"/>
 
         <CheckBox
+            style="@style/CustomCheckBok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/checkBox"
@@ -75,55 +73,28 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:checked="false"/>
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/tv_huise"
-        android:layout_marginTop="20dp"
-        android:layout_below="@+id/relativeLayout"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/view"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/view"
-        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/tv_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="￥：900元"
-            android:textColor="#D85057"
-            android:layout_marginLeft="41dp"
-            android:layout_marginStart="41dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="数量："
-            android:textColor="#5B5859"
-            android:id="@+id/textView2"
-            android:layout_alignParentTop="true"
-            android:layout_toLeftOf="@+id/lt_num"
-            android:layout_toStartOf="@+id/lt_num"/>
+            android:textSize="@dimen/sp_12"
+            android:textColor="@color/default_red"
+            android:layout_alignTop="@+id/img_icon"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
 
         <com.anxin.changbaishan.widget.CustomNumberLayout
             android:id="@+id/lt_num"
-            android:layout_width="150dp"
-            android:layout_height="40dp"
+            android:layout_width="120dp"
+            android:layout_height="36dp"
             app:min_num="1"
             app:max_num="99"
-            app:default_num="10"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"/>
+            app:default_num="1"
+            android:layout_below="@+id/tv_standard"
+            android:layout_alignLeft="@+id/tv_title"
+            android:layout_alignStart="@+id/tv_title"/>
     </RelativeLayout>
 
 </RelativeLayout>

@@ -2,10 +2,16 @@ package com.anxin.changbaishan.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Enumeration;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 /**
  * Created by Txw on 2016/4/6.
@@ -15,6 +21,11 @@ public class SPUtil {
     /* 保存在手机里面的文件名 */
     public static final String FILE_NAME = "share_data";
     public static final String TOKEN = "token";
+    public static final String ATOKEN = "atoken";
+    public static final String CARTCACHE = "LocalShoppingCartCache";
+    public static final String LOATION_ID = "Loation_id";
+    public static final String LOATION_NAME = "Loation_name";
+    public static final String USER_MOBILE_PHONE = "UserMobilePhone";
 
     private static SharedPreferences sp;
     private static SharedPreferences.Editor editor;
@@ -54,16 +65,16 @@ public class SPUtil {
      * @return
      */
     public static Object get(String key, Object defaultObject) {
-        if (defaultObject instanceof  String) {
-            return sp.getString(key, (String)defaultObject);
+        if (defaultObject instanceof String) {
+            return ((String) sp.getString(key, (String) defaultObject));
         } else if (defaultObject instanceof Integer) {
-            return sp.getInt(key, (Integer)defaultObject);
+            return ((Integer) sp.getInt(key, (Integer) defaultObject));
         } else if (defaultObject instanceof Boolean) {
-            return sp.getBoolean(key, (Boolean)defaultObject);
+            return ((Boolean) sp.getBoolean(key, (Boolean) defaultObject));
         } else if (defaultObject instanceof Float) {
-            return sp.getFloat(key, (Float)defaultObject);
+            return ((Float) sp.getFloat(key, (Float) defaultObject));
         } else if (defaultObject instanceof Long) {
-            return sp.getLong(key, (Long)defaultObject);
+            return ((Long) sp.getLong(key, (Long) defaultObject));
         }
 
         return null;
@@ -140,4 +151,52 @@ public class SPUtil {
         }
     }
 
+    public static String getChannel(Context context) {
+        ApplicationInfo appinfo = context.getApplicationInfo();
+        String sourceDir = appinfo.sourceDir;
+        String ret = "";
+        ZipFile zipfile = null;
+        try {
+            zipfile = new ZipFile(sourceDir);
+            Enumeration entries = zipfile.entries();
+            while (entries.hasMoreElements()) {
+                ZipEntry entry = ((ZipEntry) entries.nextElement());
+                String entryName = entry.getName();
+                if (entryName.startsWith("META-INF/txwchannel")) {
+                    ret = entryName;
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (zipfile != null) {
+                try {
+                    zipfile.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        String[] split = ret.split("_");
+        if (split != null && split.length >= 2) {
+            return ret.substring(split[0].length() + 1);
+
+        } else {
+            return "";
+        }
+    }
+
+    public static String getManiChannel(Context context) {
+        ApplicationInfo appinfo = null;
+        try {
+            appinfo = context.getPackageManager()
+                    .getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        String str = appinfo.metaData.getString("UMENG_CHANNEL");
+        return str;
+    }
 }

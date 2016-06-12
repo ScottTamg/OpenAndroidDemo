@@ -1,34 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="50dp"
-              android:gravity="center_vertical">
-
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:padding="5dp">
     <Button
         android:id="@+id/btn_sub"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="match_parent"
-        android:background="@drawable/sub_icon"/>
-
+        android:layout_weight="1"
+        android:background="@drawable/sub_bg"
+        style="?android:attr/borderlessButtonStyle"
+        android:gravity="center"
+        android:text="－"
+        android:textColor="@color/black_999"
+        android:textSize="20sp"/>
 
     <EditText
         android:id="@+id/editText"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="match_parent"
-        android:inputType="number"
-        android:background="@color/white"
-        android:gravity="center"
-        android:singleLine="true"
+        android:layout_weight="1"
+        android:background="@drawable/edit_bg"
         android:freezesText="true"
-        android:maxLength="4"/>
+        android:gravity="center"
+        android:textSize="@dimen/sp_12"
+        android:inputType="number"
+        android:maxLength="4"
+        android:singleLine="true" />
 
     <Button
         android:id="@+id/btn_plus"
         android:layout_width="0dp"
-        android:layout_weight="1"
         android:layout_height="match_parent"
-        android:background="@drawable/plus_icon"/>
+        android:layout_weight="1"
+        android:background="@drawable/plus_bg"
+        style="?android:attr/borderlessButtonStyle"
+        android:gravity="center"
+        android:text="＋"
+        android:textColor="@color/black_999"
+        android:textSize="20sp"/>
 
 </LinearLayout>

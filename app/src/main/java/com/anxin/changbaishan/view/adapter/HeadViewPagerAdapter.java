@@ -50,7 +50,8 @@ public class HeadViewPagerAdapter extends PagerAdapter{
         mImageViewList = new ArrayList<>();
         for (int i = 0; i < items.size(); i++) {
             mImageView = new ImageView(context);
-            mImageLoader.displayImage(imgUrl, mImageView, mOptions, null);
+            mImageView.setImageResource(R.drawable.home_foot);
+//            mImageLoader.displayImage(imgUrl, mImageView, mOptions, null);
             mImageViewList.add(mImageView);
             mImageView.setOnClickListener(new View.OnClickListener() {
                 @Override

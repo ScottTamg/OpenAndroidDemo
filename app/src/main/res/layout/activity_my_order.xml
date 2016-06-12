@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/tv_huise"
-    tools:context="com.anxin.changbaishan.view.MyOrderActivity">
+    android:background="@color/white"
+    tools:context=".view.shopping.MyOrderActivity">
 
     <include
         android:id="@+id/title"
@@ -13,182 +13,29 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"/>
 
-    <ScrollView
+    <include
+        layout="@layout/fragment_item_list_shoppingcart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/title"
+        android:layout_above="@+id/rl_total"/>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line_color"
         android:layout_above="@+id/rl_total"
-        android:overScrollMode="never"
-        android:scrollbars="none">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_above="@+id/rl_total">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@color/white"
-                android:layout_marginBottom="10dp">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/location"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:id="@+id/imageView"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name PhoneNumber"
-                    android:id="@+id/textView6"
-                    android:layout_centerVertical="true"
-                    android:layout_alignLeft="@+id/textView5"
-                    android:layout_alignStart="@+id/textView5"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Address"
-                    android:layout_marginLeft="64dp"
-                    android:layout_marginStart="64dp"
-                    android:id="@+id/textView5"
-                    android:layout_above="@+id/textView6"
-                    android:layout_toRightOf="@+id/imageView"
-                    android:layout_toEndOf="@+id/imageView"/>
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/back_selector"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"/>
-
-            </RelativeLayout>
-
-            <include
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                layout="@layout/layout_product_top_item"/>
-
-             <include
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 layout="@layout/layout_product_top_item"/>
-
-            <RelativeLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@color/white">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="支付配送"
-                    android:id="@+id/textView7"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="在线支付"
-                    android:layout_alignTop="@+id/textView7"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"
-                    android:id="@+id/textView10"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#cccccc"
-                    android:id="@+id/view2"
-                    android:layout_above="@+id/textView9"
-                    android:layout_alignRight="@+id/textView10"
-                    android:layout_alignEnd="@+id/textView10"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="配送时间"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:id="@+id/textView9"/>
-
-            </RelativeLayout>
-
-            <TextView
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="留言"
-                android:background="@color/white"/>
-
-            <RelativeLayout
-                android:layout_marginTop="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@color/white">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Small Text"
-                    android:id="@+id/textView11"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Small Text"
-                    android:id="@+id/textView12"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
-                    android:text="Small Text"
-                    android:id="@+id/textView13"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"/>
-
-                <Switch
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=""
-                    android:id="@+id/switch1"
-                    android:layout_alignTop="@+id/textView13"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentEnd="true"/>
-            </RelativeLayout>
-
-        </LinearLayout>
-
-
-    </ScrollView>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
     <RelativeLayout
         android:id="@+id/rl_total"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
@@ -202,7 +49,28 @@
             android:layout_alignParentStart="true"
             android:id="@+id/textView8"/>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="元"
+            android:textColor="#A94653"
+            android:layout_alignTop="@+id/textView8"
+            android:layout_toRightOf="@+id/textView8"
+            android:layout_toEndOf="@+id/textView8"
+            android:id="@+id/tv_total"/>
+
+        <TextView
+            android:id="@+id/tv_freight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(运费)"
+            android:layout_alignTop="@+id/tv_total"
+            android:layout_toRightOf="@+id/tv_total"
+            android:layout_toEndOf="@+id/tv_total"/>
+
         <Button
+            style="?android:attr/borderlessButtonStyle"
+            android:id="@+id/btn_done"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:background="#ff0000"

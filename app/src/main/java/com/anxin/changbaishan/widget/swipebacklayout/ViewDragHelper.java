@@ -1544,7 +1544,7 @@ public class ViewDragHelper {
     /**
      * Find the topmost child under the given point within the parent view's
      * coordinate system. The child order is determined using
-     * {@link me.imid.swipebacklayout.lib.ViewDragHelper.Callback#getOrderedChildIndex(int)}
+     * {@link (int)}
      * .
      *
      * @param x X position to test in the parent's coordinate system

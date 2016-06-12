@@ -1,34 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="title"/>
+        android:text="title"
+        android:textSize="13sp"
+        android:textColor="@color/black_333"
+        android:gravity="end|right"
+        android:lineSpacingExtra="@dimen/dp_5"
+        android:lines="2"/>
 
     <TextView
-        android:id="@+id/tv_content"
+        android:id="@+id/tv_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="content"
+        android:textSize="13sp"
         android:textColor="#A4A4A4"
         android:layout_below="@+id/tv_title"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:visibility="gone"/>
 
     <ImageView
         android:id="@+id/img_icon"
-        android:layout_width="100dp"
-        android:layout_height="60dp"
+        android:layout_width="64dp"
+        android:layout_height="44dp"
         android:src="@drawable/home_selected"
-        android:layout_alignTop="@+id/tv_money"
+        android:layout_alignBottom="@+id/img_add"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"/>
 
@@ -37,39 +46,47 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/outofstock"
+        android:visibility="gone"
         android:layout_alignTop="@+id/img_icon"
-        android:layout_alignRight="@+id/tv_content"
-        android:layout_alignEnd="@+id/tv_content"/>
+        android:layout_alignLeft="@+id/img_icon"/>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_standard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="规格："
+        android:textSize="12sp"
         android:textColor="#5B5859"
-        android:layout_below="@+id/tv_content"
-        android:layout_alignRight="@+id/tv_title"
-        android:layout_alignEnd="@+id/tv_title"/>
+        android:layout_marginTop="@dimen/dp_5"
+        android:layout_marginBottom="@dimen/dp_5"
+        android:layout_below="@+id/tv_count"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="right"/>
 
     <TextView
         android:id="@+id/tv_money"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="￥：900元"
-        android:textColor="#D85057"
-        android:layout_below="@+id/textView"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView"/>
+        android:textSize="12sp"
+        android:textColor="@color/default_red"
+        android:layout_below="@+id/tv_standard"
+        android:layout_alignRight="@+id/tv_standard"
+        android:layout_alignEnd="@+id/tv_standard"/>
 
-    <ImageView
+    <Button
         android:id="@+id/img_add"
-        android:layout_width="50dp"
-        android:layout_height="54dp"
-        android:padding="5dp"
-        android:background="@color/colorPrimary"
-        android:src="@drawable/add"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/red_round"
+        android:text="购买"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_below="@+id/tv_money"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"/>
+        android:layout_alignRight="@+id/tv_money"
+        android:layout_alignEnd="@+id/tv_money"/>
 
 </RelativeLayout>

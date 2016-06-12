@@ -89,7 +89,7 @@ public class ProductItemAdapter extends BaseAdapter {
         ImageView mImgIcon;
         @Bind(R.id.img_out_of_stock)
         ImageView mImgOutOfStock;
-        @Bind(R.id.tv_content)
+        @Bind(R.id.tv_count)
         TextView mTvContent;
         @Bind(R.id.tv_money)
         TextView mTvMoney;

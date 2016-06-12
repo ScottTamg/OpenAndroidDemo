@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <include
         layout="@layout/layout_title_normal"
@@ -9,12 +11,19 @@
         android:layout_height="50dp"
         android:id="@+id/include"/>
 
-    <include
-        layout="@layout/fragment_item_list_shoppingcart"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/include"
-        android:layout_above="@+id/rl_total"/>
+        android:layout_above="@+id/rl_total">
+
+        <include
+            layout="@layout/fragment_item_list_shoppingcart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <RelativeLayout
         android:id="@+id/rl_total"
@@ -36,6 +45,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="全选"
+            android:textColor="@color/black_333"
+            android:textSize="@dimen/sp_13"
             android:id="@+id/textView3"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_centerVertical="true"
@@ -43,9 +54,11 @@
             android:layout_alignParentStart="true"/>
 
         <CheckBox
+            style="@style/CustomCheckBok"
             android:id="@+id/checkbox_all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/textView3"
             android:layout_toEndOf="@+id/textView3"
@@ -55,6 +68,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="合计："
+            android:textColor="@color/black_333"
+            android:textSize="@dimen/sp_13"
             android:id="@+id/textView4"
             android:layout_alignTop="@+id/tv_total"
             android:layout_toLeftOf="@+id/tv_total"
@@ -65,10 +80,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="900元"
-            android:textColor="@color/colorAccent"/>
+            android:text="0元"
+            android:textColor="@color/default_red"
+            android:textSize="@dimen/sp_13"/>
 
         <Button
+            style="?android:attr/borderlessButtonStyle"
             android:id="@+id/btn_settlement"
             android:layout_width="wrap_content"
             android:layout_height="40dp"
