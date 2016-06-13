@@ -370,8 +370,9 @@
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:text="马上预约"
+                android:textSize="@dimen/sp_13"
                 android:textColor="@color/white"
-                android:background="@color/colorPrimary"/>
+                android:background="@drawable/rounded_rectangle_green_bg"/>
 
         </LinearLayout>
 

@@ -183,6 +183,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_40"
         android:text="分享"
+        android:textSize="@dimen/sp_13"
         android:textColor="@color/colorPrimary"
         android:background="@drawable/rounded_stroke_green_bg"
         android:id="@+id/btn_share"/>

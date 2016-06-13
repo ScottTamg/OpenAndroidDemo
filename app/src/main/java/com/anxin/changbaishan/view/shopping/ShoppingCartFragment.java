@@ -31,7 +31,6 @@ import com.anxin.changbaishan.utils.SPUtil;
 import com.anxin.changbaishan.view.MainTabActivity;
 import com.anxin.changbaishan.view.RegisterActivity;
 import com.anxin.changbaishan.view.adapter.ShoppingCartItemAdapter;
-import com.anxin.changbaishan.widget.RecycleViewDivider;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -152,7 +151,6 @@ public class ShoppingCartFragment extends Fragment {
                 mActivity.showShortToast("客服订水");
                 break;
             case R.id.btn_settlement:
-                // TODO: 2016/4/28 模拟下单成功
                 if ("".equals( (String)mActivity.spUtil.get(SPUtil.ATOKEN, ""))) {
                     mActivity.startAnimActivity(RegisterActivity.class);
                 } else {
@@ -207,8 +205,8 @@ public class ShoppingCartFragment extends Fragment {
         }
 
         mList.setItemAnimator(new DefaultItemAnimator());
-        mList.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL
-                , 2, mActivity.getResources().getColor(R.color.divider_gray)));
+        /*mList.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL
+                , 2, mActivity.getResources().getColor(R.color.divider_gray)));*/
     }
 
     public void checkedOptions() {
