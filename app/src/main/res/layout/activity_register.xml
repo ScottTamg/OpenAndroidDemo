@@ -62,6 +62,7 @@
                     android:layout_weight="1"
                     android:layout_marginLeft="14dp"
                     android:layout_gravity="center_horizontal"
+                    android:background="@drawable/rounded_rectangle_green_bg"
                     android:text="发送验证码"/>
 
             </LinearLayout>
@@ -111,6 +112,7 @@
                 style="@style/ButtonLine"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
+                android:background="@drawable/rounded_rectangle_green_bg"
                 android:text="注册"/>
 
         </LinearLayout>

@@ -1,7 +1,6 @@
 package com.anxin.changbaishan.view.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +10,6 @@ import android.widget.Toast;
 
 import com.anxin.changbaishan.R;
 import com.anxin.changbaishan.view.dummy.DummyContent;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +19,8 @@ import java.util.List;
  */
 public class HeadViewPagerAdapter extends PagerAdapter{
     private Context mContext;
-    private ImageLoader mImageLoader;
-    private DisplayImageOptions mOptions;
+//    private ImageLoader mImageLoader;
+//    private DisplayImageOptions mOptions;
     private ImageView mImageView;
     public List<ImageView> mImageViewList;
     private View mView;
@@ -36,16 +30,16 @@ public class HeadViewPagerAdapter extends PagerAdapter{
 
     public HeadViewPagerAdapter(final Context context, LinearLayout pointGroup, List<DummyContent.DummyItem> items) {
         this.mContext = context;
-        mImageLoader = ImageLoader.getInstance();
-        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
-        mOptions = new DisplayImageOptions.Builder()
-                .showImageOnLoading(R.color.nocolor)
-                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .showImageForEmptyUri(R.color.nocolor)
-                .showImageOnFail(R.color.nocolor).cacheInMemory(true)
-                .cacheOnDisc(true).displayer(new RoundedBitmapDisplayer(1))
-                .build();
+//        mImageLoader = ImageLoader.getInstance();
+//        mImageLoader.init(ImageLoaderConfiguration.createDefault(mContext));
+//        mOptions = new DisplayImageOptions.Builder()
+//                .showImageOnLoading(R.color.nocolor)
+//                .imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
+//                .bitmapConfig(Bitmap.Config.RGB_565)
+//                .showImageForEmptyUri(R.color.nocolor)
+//                .showImageOnFail(R.color.nocolor).cacheInMemory(true)
+//                .cacheOnDisc(true).displayer(new RoundedBitmapDisplayer(1))
+//                .build();
 
         mImageViewList = new ArrayList<>();
         for (int i = 0; i < items.size(); i++) {

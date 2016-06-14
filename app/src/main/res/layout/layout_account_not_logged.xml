@@ -27,8 +27,9 @@
         android:layout_width="100dp"
         android:layout_height="35dp"
         android:layout_marginTop="13dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/rounded_rectangle_green_bg"
         android:text="马上登录"
+        android:textSize="@dimen/sp_13"
         android:textColor="@color/white"/>
 
 </LinearLayout>

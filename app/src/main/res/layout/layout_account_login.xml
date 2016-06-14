@@ -45,14 +45,15 @@
             <Button
                 style="?android:attr/borderlessButtonStyle"
                 android:id="@+id/btn_appointment"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/rounded_rectangle_green_bg"
                 android:text="预约送水"
+                android:textSize="@dimen/sp_13"
                 android:textColor="@color/white"/>
 
         </RelativeLayout>
