@@ -43,7 +43,8 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainTabActivity extends BaseActivity implements ShoppingCartFragment.OnListFragmentInteractionListener,
+public class MainTabActivity extends BaseActivity
+        implements ShoppingCartFragment.OnListFragmentInteractionListener,
         HomeFragment.OnListHomeFragmentInteractionListener {
     @Bind(R.id.tab_content)
     ViewPager mViewPager;
@@ -184,7 +185,7 @@ public class MainTabActivity extends BaseActivity implements ShoppingCartFragmen
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
+        mViewPager.setOffscreenPageLimit(2);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

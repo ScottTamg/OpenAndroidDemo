@@ -87,7 +87,7 @@ public class VolleyRequest {
      * @param listener
      */
     public static void getCitys(String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=CommonApi&cmd=GetCitys");
         url.append("&pl=");
@@ -111,7 +111,7 @@ public class VolleyRequest {
      * @param listener
      */
     public static void getAreas(int pid, String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=CommonApi&cmd=GetCitys");
         url.append("&pl=");
@@ -142,7 +142,7 @@ public class VolleyRequest {
      */
     public static void getAddLoan(String token, int borrowid, String amount,
                                   int couponIds, String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=DiYa&cmd=AddLoan");
         url.append("&pl=");
@@ -151,7 +151,7 @@ public class VolleyRequest {
         url.append("&couponIds=");
         url.append(couponIds);
 
-        StringBuffer sign = new StringBuffer();
+        StringBuilder sign = new StringBuilder();
         sign.append("&borrowid=");
         sign.append(borrowid);
         sign.append("&amount=");
@@ -181,7 +181,7 @@ public class VolleyRequest {
      * @param listener
      */
     public static void getProductList(String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=Products&cmd=GetProductList");
         url.append("&pl=");
@@ -204,7 +204,7 @@ public class VolleyRequest {
      * @param listener
      */
     public static void getTrialProductList(String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=Products&cmd=GetTrialProductList");
         url.append("&pl=");
@@ -229,7 +229,7 @@ public class VolleyRequest {
      * @param listener
      */
     public static void creatMyOrders(String list, String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=Orders&cmd=CreatMyOrders");
         url.append("&list=");
@@ -261,7 +261,7 @@ public class VolleyRequest {
     public static void confirmOrders(int orderId, int invoiceType, String invoiceAddress,
                                      int userBonusPoints, String remark,
                                      String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=Orders&cmd=ConfirmOrders");
         url.append("&orderId=");
@@ -296,7 +296,7 @@ public class VolleyRequest {
      * @param listener
      */
     public static void getOrderModel(int orderId, String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=Orders&cmd=GetOrderModel");
         url.append("&orderId=");
@@ -321,12 +321,17 @@ public class VolleyRequest {
      * @param tag
      * @param listener
      */
-    public static void getMyOrderList(int orderState, String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+    public static void getMyOrderList(int pageSize, int pageIndex, int orderState, String tag,
+                                      VolleyRequestListener listener) {
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=Orders&cmd=GetMyOrderList");
         url.append("&orderState=");
         url.append(orderState);
+        url.append("&pageSize=");
+        url.append(pageSize);
+        url.append("&pageIndex=");
+        url.append(pageIndex);
         url.append("&pl=");
         url.append(PL);
 
@@ -348,7 +353,7 @@ public class VolleyRequest {
      * @param listener
      */
     public static void cancelOrder(int orderId, String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=Orders&cmd=CancelOrder");
         url.append("&orderId=");
@@ -381,7 +386,7 @@ public class VolleyRequest {
     public static void addAddress(int cityId, int districtId, String address,
                                   String userName, String mobile, int setDefault,
                                     String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=UserAddress&cmd=AddAddress");
         url.append("&cityId=");
@@ -424,7 +429,7 @@ public class VolleyRequest {
     public static void editAddress(int cityId, int districtId, String address,
                                    String userName, String mobile, int setDefault, int addressId,
                                      String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=UserAddress&cmd=EditAddress");
         url.append("&cityId=");
@@ -462,7 +467,7 @@ public class VolleyRequest {
      * @param listener
      */
     public static void getAddressList(String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=UserAddress&cmd=GetAddressList");
         url.append("&pl=");
@@ -487,7 +492,7 @@ public class VolleyRequest {
      */
     public static void deleteAddress(int addressId, String tag,
                                      VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=UserAddress&cmd=DeleteAddress");
         url.append("&pl=");
@@ -515,7 +520,7 @@ public class VolleyRequest {
      */
     public static void setDefaultAddress(int addressId, String tag,
                                          VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=UserAddress&cmd=SetDefaultAddress");
         url.append("&pl=");
@@ -543,7 +548,7 @@ public class VolleyRequest {
      */
     public static void creatDeliveryOrders(String remark, String list, int deliveryTime, int userAddressId,
                                            String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=Delivery&cmd=CreatDeliveryOrders");
         url.append("&pl=");
@@ -572,10 +577,14 @@ public class VolleyRequest {
      * @param tag
      * @param listener
      */
-    public static void getMyDeliveryList(String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+    public static void getMyDeliveryList(int pageSize, int pageIndex, String tag, VolleyRequestListener listener) {
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=Delivery&cmd=GetMyDeliveryList");
+        url.append("&pageSize=");
+        url.append(pageSize);
+        url.append("&pageIndex=");
+        url.append(pageIndex);
         url.append("&pl=");
         url.append(PL);
 
@@ -596,7 +605,7 @@ public class VolleyRequest {
      * @param listener
      */
     public static void getMyDeliveryModel(int orderId, String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=Delivery&cmd=GetMyDeliveryModel");
         url.append("&pl=");
@@ -621,7 +630,7 @@ public class VolleyRequest {
      * @param listener
      */
     public static void getDeliveryComment(int orderId, String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=Delivery&cmd=GetDeliveryComment");
         url.append("&pl=");
@@ -650,7 +659,7 @@ public class VolleyRequest {
      */
     public static void addComment(int parentId, String content, int stars, int orderId, String tag,
                                   VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=Delivery&cmd=AddComment");
         url.append("&pl=");
@@ -681,7 +690,7 @@ public class VolleyRequest {
      * @param listener
      */
     public static void deleteComment(int orderId, String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=Delivery&cmd=DeleteComment");
         url.append("&pl=");
@@ -706,7 +715,7 @@ public class VolleyRequest {
      * @param listener
      */
     public static void cancelDeliveryOrder(int orderId, String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=Delivery&cmd=CancelOrder");
         url.append("&pl=");
@@ -731,7 +740,7 @@ public class VolleyRequest {
      * @param listener
      */
     public static void getDeliveryCommentInfo(int orderId, String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=Delivery&cmd=GetDeliveryCommentInfo");
         url.append("&pl=");
@@ -756,7 +765,7 @@ public class VolleyRequest {
      * @param listener
      */
     public static void getUserBonusPoints(int typeId, String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=UserCenter&cmd=GetUserBonusPoints");
         url.append("&pl=");
@@ -781,7 +790,7 @@ public class VolleyRequest {
      * @param listener
      */
     public static void paySuccess(int orderId, String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=UserCenter&cmd=PaySuccess");
         url.append("&pl=");
@@ -806,7 +815,7 @@ public class VolleyRequest {
      * @param listener
      */
     public static void getMyProductsList(int getAddress, String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=UserCenter&cmd=GetMyProductsList");
         url.append("&pl=");
@@ -830,7 +839,7 @@ public class VolleyRequest {
      * @param listener
      */
     public static void getMyInfo(String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=UserCenter&cmd=GetMyInfo");
         url.append("&pl=");
@@ -852,7 +861,7 @@ public class VolleyRequest {
      * @param listener
      */
     public static void getInviteInfo( String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=UserCenter&cmd=GetInviteInfo");
         url.append("&pl=");
@@ -878,7 +887,7 @@ public class VolleyRequest {
      */
     public static void creatFriendOrder(String list, String friendName, String friendMobile,
                                         String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=UserCenter&cmd=CreatFriendOrder");
         url.append("&pl=");
@@ -906,7 +915,7 @@ public class VolleyRequest {
      * @param listener
      */
     public static void cancelFriendOrder(int orderId, String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=UserCenter&cmd=CancelFriendOrder");
         url.append("&pl=");
@@ -932,7 +941,7 @@ public class VolleyRequest {
      */
     public static void acceptFriendOrder(String orderId, String giftKey, String tag,
                                          VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=UserCenter&cmd=AcceptFriendOrder");
         url.append("&pl=");
@@ -957,7 +966,7 @@ public class VolleyRequest {
      * @param listener
      */
     public static void getMyFriendOrderList(String tag, VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=UserCenter&cmd=GetMyFriendOrderList");
         url.append("&pl=");
@@ -980,7 +989,7 @@ public class VolleyRequest {
      */
     public static void getMyFriendDetail(int orderId, String tag,
                                          VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=UserCenter&cmd=GetMyFriendDetail");
         url.append("&pl=");
@@ -1002,11 +1011,15 @@ public class VolleyRequest {
      * @param tag
      * @param listener
      */
-    public static void getGiveToMeFriendOrderList(String tag,
+    public static void getGiveToMeFriendOrderList(int pageSize, int pageIndex, String tag,
                                                   VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=UserCenter&cmd=GetGiveToMeFriendOrderList");
+        url.append("&pageSize=");
+        url.append(pageSize);
+        url.append("&pageIndex=");
+        url.append(pageIndex);
         url.append("&pl=");
         url.append(PL);
         url.append("&token=");
@@ -1028,7 +1041,7 @@ public class VolleyRequest {
      */
     public static void GetGiveToMeFriendOrderDetail(String orderId, String giftKey, String tag,
                                                     VolleyRequestListener listener) {
-        StringBuffer url = new StringBuffer();
+        StringBuilder url = new StringBuilder();
         url.append(API_URL);
         url.append("?action=UserCenter&cmd=GetGiveToMeFriendOrderDetail");
         url.append("&pl=");
@@ -1046,6 +1059,31 @@ public class VolleyRequest {
             volleyGet(url.toString(), tag, listener);
         }
     }
+
+    /**
+     * 上传头像
+     * @param imageData
+     * @param tag
+     * @param listener
+     */
+    public static void uploadPhoto(String imageData, String tag, VolleyRequestListener listener) {
+        String url = API_URL;
+        Map<String, String> params = new ArrayMap<>();
+        params.put("action", "UserCenter");
+        params.put("pl", String.valueOf(PL));
+        params.put("token", (String) spUtil.get(SPUtil.TOKEN, ""));
+        params.put("cmd", "UploadPhoto");
+        params.put("imageData", imageData);
+        params.put("aToken", (String) spUtil.get(SPUtil.ATOKEN, ""));
+
+        if (params.get("token").isEmpty()) {
+            volleyPostNoToken(url, params, tag, listener);
+        } else {
+            volleyPost(url, params, tag, listener);
+        }
+    }
+
+
 
     /**
      * 获取token

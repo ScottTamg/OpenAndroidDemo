@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import com.anxin.changbaishan.R;
@@ -15,9 +16,12 @@ import com.anxin.changbaishan.http.VolleyRequest;
 import com.anxin.changbaishan.http.VolleyRequestListener;
 import com.anxin.changbaishan.utils.SPUtil;
 import com.anxin.changbaishan.view.RegisterActivity;
+import com.anxin.changbaishan.view.adapter.RecyclerViewStateUtils;
 import com.anxin.changbaishan.view.adapter.SendFriendOrderAdapter;
 import com.anxin.changbaishan.view.base.SwipeBackActivity;
-import com.anxin.changbaishan.widget.RecycleViewDivider;
+import com.anxin.changbaishan.widget.LoadingFooter;
+import com.anxin.changbaishan.widget.recyclerview.EndlessRecyclerOnScrollListener;
+import com.anxin.changbaishan.widget.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -35,7 +39,10 @@ public class SendFriendOrderActivity extends SwipeBackActivity
     SwipeRefreshLayout mSwipeRefresh;
 
     private FriendOrderEntity.DataBean mData;
+    private HeaderAndFooterRecyclerViewAdapter mHeaderAndFooterRecyclerViewAdapter = null;
     private SendFriendOrderAdapter mAdapter;
+    private int pageIndex = 1;
+    private int pageSize = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,14 +63,16 @@ public class SendFriendOrderActivity extends SwipeBackActivity
         mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                pageIndex = 1;
                 getMyFriendOrderList();
             }
         });
 
         mList.setLayoutManager(new LinearLayoutManager(mActivity));
         mList.setItemAnimator(new DefaultItemAnimator());
-        mList.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL
-                , 2, mActivity.getResources().getColor(R.color.divider_gray)));
+        /*mList.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL
+                , 2, mActivity.getResources().getColor(R.color.divider_gray)));*/
+        mList.addOnScrollListener(mOnScrollListener);
     }
 
 
@@ -90,6 +99,7 @@ public class SendFriendOrderActivity extends SwipeBackActivity
                     showShortToast(error);
                 }
                 mSwipeRefresh.setRefreshing(false);
+                RecyclerViewStateUtils.setFooterViewState(mList, LoadingFooter.State.Normal);
             }
         });
     }
@@ -101,10 +111,12 @@ public class SendFriendOrderActivity extends SwipeBackActivity
             if (null == mAdapter) {
                 mAdapter = new SendFriendOrderAdapter(mActivity, mData.getList(),
                         (SendFriendOrderAdapter.OnSendFriendListInteractionListener) mActivity);
+                mHeaderAndFooterRecyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(mAdapter);
                 mList.setAdapter(mAdapter);
-            } else {
+            } else if (pageIndex == 1) {
                 mAdapter.setList(mData.getList());
-                mAdapter.notifyDataSetChanged();
+            } else {
+                mAdapter.addData(mData.getList());
             }
         }
     }
@@ -135,6 +147,26 @@ public class SendFriendOrderActivity extends SwipeBackActivity
             }
         });
     }
+
+    private EndlessRecyclerOnScrollListener mOnScrollListener = new EndlessRecyclerOnScrollListener() {
+        @Override
+        public void onLoadNextPage(View view) {
+            super.onLoadNextPage(view);
+
+            LoadingFooter.State state = RecyclerViewStateUtils.getFooterViewState(mList);
+            if (state == LoadingFooter.State.Loading) {
+                return;
+            }
+
+            if (mData.getTotalCount() > pageIndex * pageSize) {
+                RecyclerViewStateUtils.setFooterViewState(mActivity, mList, pageSize, LoadingFooter.State.Loading, null);
+                pageIndex++;
+                getMyFriendOrderList();
+            } else {
+                RecyclerViewStateUtils.setFooterViewState(mActivity, mList, pageSize, LoadingFooter.State.TheEnd, null);
+            }
+        }
+    };
 
     @Override
     public void onDetailInteraction(FriendOrderEntity.DataBean.ListBean item) {

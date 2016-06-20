@@ -20,6 +20,10 @@ import com.anxin.changbaishan.http.VolleyRequestListener;
 import com.anxin.changbaishan.utils.SPUtil;
 import com.anxin.changbaishan.view.RegisterActivity;
 import com.anxin.changbaishan.view.adapter.BonusPointsAdapter;
+import com.anxin.changbaishan.view.adapter.RecyclerViewStateUtils;
+import com.anxin.changbaishan.widget.LoadingFooter;
+import com.anxin.changbaishan.widget.recyclerview.EndlessRecyclerOnScrollListener;
+import com.anxin.changbaishan.widget.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -39,6 +43,9 @@ public class BonusPointsFragment extends Fragment {
     private BonusPointsActivity mActivity;
     private BonusPointsEntity.DataBean mData;
     private BonusPointsAdapter mAdapter;
+    private HeaderAndFooterRecyclerViewAdapter mHeaderAndFooterRecyclerViewAdapter = null;
+    private int pageIndex = 1;
+    private int pageSize = 10;
 
     public BonusPointsFragment() {}
 
@@ -82,7 +89,8 @@ public class BonusPointsFragment extends Fragment {
         mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mSwipeRefresh.setRefreshing(false);
+                pageIndex = 1;
+                getUserBonusPoints();
             }
         });
 
@@ -90,6 +98,7 @@ public class BonusPointsFragment extends Fragment {
         mList.setItemAnimator(new DefaultItemAnimator());
 //        mList.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL
 //                , 0, mActivity.getResources().getColor(R.color.bg_gray)));
+        mList.addOnScrollListener(mOnScrollListener);
     }
 
     @Override
@@ -109,8 +118,13 @@ public class BonusPointsFragment extends Fragment {
                             if (0 == entity.getErrorNo()) {
                                 mData = entity.getData();
                                 mActivity.setTvBonusPoints(mData.getBonusPoints());
-                                mAdapter = new BonusPointsAdapter(sFragment, mData.getList());
-                                mList.setAdapter(mAdapter);
+                                if (mAdapter == null) {
+                                    mAdapter = new BonusPointsAdapter(sFragment, mData.getList());
+                                    mHeaderAndFooterRecyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(mAdapter);
+                                    mList.setAdapter(mHeaderAndFooterRecyclerViewAdapter);
+                                } else {
+                                    mAdapter.addData(mData.getList());
+                                }
 
                             } else if (-99 == entity.getErrorNo()) {
                                 mActivity.spUtil.put(SPUtil.TOKEN, "");
@@ -124,8 +138,30 @@ public class BonusPointsFragment extends Fragment {
                         } else {
                             mActivity.showShortToast(error);
                         }
+                        mSwipeRefresh.setRefreshing(false);
+                        RecyclerViewStateUtils.setFooterViewState(mList, LoadingFooter.State.Normal);
                     }
                 });
     }
+
+    private EndlessRecyclerOnScrollListener mOnScrollListener = new EndlessRecyclerOnScrollListener() {
+        @Override
+        public void onLoadNextPage(View view) {
+            super.onLoadNextPage(view);
+
+            LoadingFooter.State state = RecyclerViewStateUtils.getFooterViewState(mList);
+            if (state == LoadingFooter.State.Loading) {
+                return;
+            }
+
+            if (mData.getTotalCount() > pageIndex * pageSize) {
+                RecyclerViewStateUtils.setFooterViewState(mActivity, mList, pageSize, LoadingFooter.State.Loading, null);
+                pageIndex++;
+                getUserBonusPoints();
+            } else {
+                RecyclerViewStateUtils.setFooterViewState(mActivity, mList, pageSize, LoadingFooter.State.TheEnd, null);
+            }
+        }
+    };
 
 }

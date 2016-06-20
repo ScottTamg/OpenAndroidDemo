@@ -58,8 +58,7 @@ public class DeliverDetailsActivity extends SwipeBackActivity {
         mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
-                mSwipeRefresh.setRefreshing(false);
+                getMyDeliveryModel();
             }
         });
     }
@@ -87,6 +86,7 @@ public class DeliverDetailsActivity extends SwipeBackActivity {
                         } else {
                             showShortToast(error);
                         }
+                        mSwipeRefresh.setRefreshing(false);
                     }
                 });
     }

@@ -12,11 +12,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationSet;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -41,6 +39,8 @@ import com.anxin.changbaishan.widget.recyclerview.EndlessRecyclerOnScrollListene
 import com.anxin.changbaishan.widget.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 import com.anxin.changbaishan.widget.recyclerview.HeaderSpanSizeLookup;
 import com.anxin.changbaishan.widget.recyclerview.RecyclerViewUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 import java.util.Timer;
@@ -96,8 +96,6 @@ public class HomeFragment extends Fragment {
     private ViewPager mViewpagerHead;
     private RelativeLayout headview;
     private RelativeLayout footview;
-
-    private AnimationSet as;
 
     /**
      * Use this factory method to create a new instance of
@@ -300,6 +298,7 @@ public class HomeFragment extends Fragment {
     private void setFootview() {
         LayoutInflater inflater = LayoutInflater.from(mActivity);
         footview = (RelativeLayout) inflater.inflate(R.layout.layout_product_top_item, null);
+        TextView tvTopId = (TextView) footview.findViewById(R.id.tv_id);
         TextView tvTopTitle = (TextView) footview.findViewById(R.id.tv_title);
         TextView tvTopContent = (TextView) footview.findViewById(R.id.tv_count);
         TextView tvTopstandard = (TextView) footview.findViewById(R.id.tv_standard);
@@ -308,8 +307,9 @@ public class HomeFragment extends Fragment {
         Button btnTopAdd = (Button) footview.findViewById(R.id.img_add);
 
         final ProductEntity.DataBean.ListBean topItem = mTrialProductList.get(0);
-        tvTopTitle.setText(Html.fromHtml(topItem.getName() + "<font color='#999999'>"
-                + topItem.getSummary() + "</font>"));
+        tvTopId.setText(topItem.getID());
+        tvTopTitle.setText(topItem.getName() + "（"
+                + topItem.getSummary() + "）");
 //        tvTopContent.setText(topItem.getSummary());
         tvTopstandard.setText("规格：" + topItem.getStandard());
         tvTopMoney.setText("￥：" + topItem.getSellPrice());
@@ -322,6 +322,7 @@ public class HomeFragment extends Fragment {
                 imgTopicon.getLocationInWindow(location);
                 Drawable drawable = imgTopicon.getDrawable();
                 mActivity.onListHomeFragmentInteraction(topItem, drawable, location);
+                EventBus.getDefault().post(topItem);
             }
         });
     }

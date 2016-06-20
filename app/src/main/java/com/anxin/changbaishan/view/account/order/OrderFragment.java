@@ -22,9 +22,11 @@ import com.anxin.changbaishan.http.VolleyRequestListener;
 import com.anxin.changbaishan.utils.SPUtil;
 import com.anxin.changbaishan.view.RegisterActivity;
 import com.anxin.changbaishan.view.adapter.OrderStartItemAdapter;
+import com.anxin.changbaishan.view.adapter.RecyclerViewStateUtils;
 import com.anxin.changbaishan.view.shopping.SelectPaymentMethodActivity;
-
-import java.util.List;
+import com.anxin.changbaishan.widget.LoadingFooter;
+import com.anxin.changbaishan.widget.recyclerview.EndlessRecyclerOnScrollListener;
+import com.anxin.changbaishan.widget.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -33,7 +35,7 @@ import butterknife.ButterKnife;
  * A simple {@link Fragment} subclass.
  */
 public class OrderFragment extends Fragment
-        implements OrderStartItemAdapter.OnOrderStratListInteractionListener{
+        implements OrderStartItemAdapter.OnOrderStratListInteractionListener {
     /**
      * The fragment argument representing the section number for this
      * fragment.
@@ -46,12 +48,16 @@ public class OrderFragment extends Fragment
 
     private int mParam;
     private OrderActivity mActivity;
-    private List<MyOrderItemEntity.DataBean.ListBean> mListBeen;
+    private MyOrderItemEntity.DataBean mDataBean;
     private MyOrderItemEntity.DataBean.ListBean mSelectedItem;
+    private HeaderAndFooterRecyclerViewAdapter mHeaderAndFooterRecyclerViewAdapter = null;
     private OrderStartItemAdapter mAdapter;
     private static OrderFragment mFragment;
+    private int pageIndex = 1;
+    private int pageSize = 10;
 
-    public OrderFragment() {}
+    public OrderFragment() {
+    }
 
     public static OrderFragment newInstance(int sectionNumber) {
         OrderFragment fragment = new OrderFragment();
@@ -93,7 +99,8 @@ public class OrderFragment extends Fragment
         mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mSwipeRefresh.setRefreshing(false);
+                pageIndex = 1;
+                getMyOrderList();
             }
         });
 
@@ -101,6 +108,8 @@ public class OrderFragment extends Fragment
         mList.setItemAnimator(new DefaultItemAnimator());
 //        mList.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL
 //                , 0, mActivity.getResources().getColor(R.color.bg_gray)));
+
+        mList.addOnScrollListener(mOnScrollListener);
     }
 
     @Override
@@ -110,7 +119,7 @@ public class OrderFragment extends Fragment
     }
 
     private void getMyOrderList() {
-        VolleyRequest.getMyOrderList(mParam, this.getClass().getSimpleName(),
+        VolleyRequest.getMyOrderList(pageSize, pageIndex, mParam, this.getClass().getSimpleName(),
                 new VolleyRequestListener() {
                     @Override
                     public void success(boolean isSuccess, String response, String error) {
@@ -118,10 +127,18 @@ public class OrderFragment extends Fragment
                             MyOrderItemEntity entity = mActivity.loadDataUtil.getJsonData(response,
                                     MyOrderItemEntity.class);
                             if (0 == entity.getErrorNo()) {
+                                mDataBean = entity.getData();
+                                if (mAdapter == null) {
+                                    mAdapter = new OrderStartItemAdapter(mActivity, mDataBean.getList(), mFragment);
+                                    mHeaderAndFooterRecyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(mAdapter);
+                                    mList.setAdapter(mHeaderAndFooterRecyclerViewAdapter);
+                                } else if (pageIndex == 1) {
+                                    mAdapter.setList(mDataBean.getList());
+                                } else {
+                                    mAdapter.addData(mDataBean.getList());
+                                    mHeaderAndFooterRecyclerViewAdapter.notifyDataSetChanged();
 
-                                mListBeen = entity.getData().getList();
-                                mAdapter = new OrderStartItemAdapter(mActivity, mListBeen, mFragment);
-                                mList.setAdapter(mAdapter);
+                                }
 
                             } else if (-99 == entity.getErrorNo()) {
                                 mActivity.spUtil.put(SPUtil.TOKEN, "");
@@ -135,6 +152,8 @@ public class OrderFragment extends Fragment
                         } else {
                             mActivity.showShortToast(error);
                         }
+                        mSwipeRefresh.setRefreshing(false);
+                        RecyclerViewStateUtils.setFooterViewState(mList, LoadingFooter.State.Normal);
                     }
                 });
     }
@@ -150,7 +169,7 @@ public class OrderFragment extends Fragment
                             if (0 == entity.getErrorNo()) {
                                 mAdapter.getList().remove(mSelectedItem.getOrderId());
                                 mAdapter.notifyDataSetChanged();
-                            } else if(-99 == entity.getErrorNo()) {
+                            } else if (-99 == entity.getErrorNo()) {
                                 mActivity.spUtil.put(SPUtil.TOKEN, "");
                                 cancelOrder();
                             } else if (-52 == entity.getErrorNo()) {
@@ -165,6 +184,26 @@ public class OrderFragment extends Fragment
                     }
                 });
     }
+
+    private EndlessRecyclerOnScrollListener mOnScrollListener = new EndlessRecyclerOnScrollListener() {
+        @Override
+        public void onLoadNextPage(View view) {
+            super.onLoadNextPage(view);
+
+            LoadingFooter.State state = RecyclerViewStateUtils.getFooterViewState(mList);
+            if (state == LoadingFooter.State.Loading) {
+                return;
+            }
+
+            if (mDataBean.getTotalCount() > pageIndex * pageSize) {
+                RecyclerViewStateUtils.setFooterViewState(mActivity, mList, pageSize, LoadingFooter.State.Loading, null);
+                pageIndex++;
+                getMyOrderList();
+            } else {
+                RecyclerViewStateUtils.setFooterViewState(mActivity, mList, pageSize, LoadingFooter.State.TheEnd, null);
+            }
+        }
+    };
 
     @Override
     public void onItemInteraction(MyOrderItemEntity.DataBean.ListBean item) {

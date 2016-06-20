@@ -44,6 +44,7 @@ public class HeadViewPagerAdapter extends PagerAdapter{
         mImageViewList = new ArrayList<>();
         for (int i = 0; i < items.size(); i++) {
             mImageView = new ImageView(context);
+            mImageView.setScaleType(ImageView.ScaleType.FIT_XY);
             mImageView.setImageResource(R.drawable.home_foot);
 //            mImageLoader.displayImage(imgUrl, mImageView, mOptions, null);
             mImageViewList.add(mImageView);

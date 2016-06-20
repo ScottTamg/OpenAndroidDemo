@@ -1,5 +1,6 @@
 package com.anxin.changbaishan.utils;
 
+import android.support.annotation.NonNull;
 import android.text.InputFilter;
 import android.text.Spanned;
 
@@ -18,7 +19,7 @@ public class InputFilterMinMax implements InputFilter{
     }
 
     @Override
-    public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+    public CharSequence filter(@NonNull CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
         try {
             int input = Integer.parseInt(dest.toString() + source.toString());
             if (input < mMin) {

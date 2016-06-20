@@ -6,6 +6,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import com.anxin.changbaishan.R;
@@ -15,8 +16,11 @@ import com.anxin.changbaishan.http.VolleyRequestListener;
 import com.anxin.changbaishan.utils.SPUtil;
 import com.anxin.changbaishan.view.RegisterActivity;
 import com.anxin.changbaishan.view.adapter.GiveToMeFriendOrderAdapter;
+import com.anxin.changbaishan.view.adapter.RecyclerViewStateUtils;
 import com.anxin.changbaishan.view.base.SwipeBackActivity;
-import com.anxin.changbaishan.widget.RecycleViewDivider;
+import com.anxin.changbaishan.widget.LoadingFooter;
+import com.anxin.changbaishan.widget.recyclerview.EndlessRecyclerOnScrollListener;
+import com.anxin.changbaishan.widget.recyclerview.HeaderAndFooterRecyclerViewAdapter;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -33,7 +37,10 @@ public class GiveToMeOrderActivity extends SwipeBackActivity implements GiveToMe
     SwipeRefreshLayout mSwipeRefresh;
 
     private FriendOrderEntity.DataBean mData;
+    private HeaderAndFooterRecyclerViewAdapter mHeaderAndFooterRecyclerViewAdapter = null;
     private GiveToMeFriendOrderAdapter mAdapter;
+    private int pageIndex = 1;
+    private int pageSize = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,41 +61,45 @@ public class GiveToMeOrderActivity extends SwipeBackActivity implements GiveToMe
         mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                pageIndex = 1;
                 getGiveToMeFriendOrderList();
             }
         });
 
         mList.setLayoutManager(new LinearLayoutManager(mActivity));
         mList.setItemAnimator(new DefaultItemAnimator());
-        mList.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL
-                , 2, mActivity.getResources().getColor(R.color.divider_gray)));
+//        mList.addItemDecoration(new RecycleViewDivider(mActivity, LinearLayoutManager.HORIZONTAL
+//                , 2, mActivity.getResources().getColor(R.color.divider_gray)));
+        mList.addOnScrollListener(mOnScrollListener);
     }
 
     private void getGiveToMeFriendOrderList() {
-        VolleyRequest.getGiveToMeFriendOrderList(this.getClass().getSimpleName(), new VolleyRequestListener() {
-            @Override
-            public void success(boolean isSuccess, String response, String error) {
-                if (isSuccess) {
-                    FriendOrderEntity entity =
-                            loadDataUtil.getJsonData(response, FriendOrderEntity.class);
-                    if (0 == entity.getErrorNo()) {
-                        mData = entity.getData();
-                        showData();
-                    } else if (-99 == entity.getErrorNo()) {
-                        spUtil.put(SPUtil.TOKEN, "");
-                        getGiveToMeFriendOrderList();
-                    } else if (-52 == entity.getErrorNo()) {
-                        spUtil.put(SPUtil.ATOKEN, "");
-                        startAnimActivity(RegisterActivity.class);
-                    } else {
-                        showShortToast(entity.getMessage());
+        VolleyRequest.getGiveToMeFriendOrderList(pageSize, pageIndex, this.getClass().getSimpleName(),
+                new VolleyRequestListener() {
+                    @Override
+                    public void success(boolean isSuccess, String response, String error) {
+                        if (isSuccess) {
+                            FriendOrderEntity entity =
+                                    loadDataUtil.getJsonData(response, FriendOrderEntity.class);
+                            if (0 == entity.getErrorNo()) {
+                                mData = entity.getData();
+                                showData();
+                            } else if (-99 == entity.getErrorNo()) {
+                                spUtil.put(SPUtil.TOKEN, "");
+                                getGiveToMeFriendOrderList();
+                            } else if (-52 == entity.getErrorNo()) {
+                                spUtil.put(SPUtil.ATOKEN, "");
+                                startAnimActivity(RegisterActivity.class);
+                            } else {
+                                showShortToast(entity.getMessage());
+                            }
+                        } else {
+                            showShortToast(error);
+                        }
+                        mSwipeRefresh.setRefreshing(false);
+                        RecyclerViewStateUtils.setFooterViewState(mList, LoadingFooter.State.Normal);
                     }
-                } else {
-                    showShortToast(error);
-                }
-                mSwipeRefresh.setRefreshing(false);
-            }
-        });
+                });
     }
 
     private void showData() {
@@ -98,13 +109,35 @@ public class GiveToMeOrderActivity extends SwipeBackActivity implements GiveToMe
             if (null == mAdapter) {
                 mAdapter = new GiveToMeFriendOrderAdapter(mActivity, mData.getList(),
                         (GiveToMeFriendOrderAdapter.OnSendFriendListInteractionListener) mActivity);
-                mList.setAdapter(mAdapter);
-            } else {
+                mHeaderAndFooterRecyclerViewAdapter = new HeaderAndFooterRecyclerViewAdapter(mAdapter);
+                mList.setAdapter(mHeaderAndFooterRecyclerViewAdapter);
+            } else if(pageIndex == 1) {
                 mAdapter.setList(mData.getList());
-                mAdapter.notifyDataSetChanged();
+            } else {
+                mAdapter.addData(mData.getList());
             }
         }
     }
+
+    private EndlessRecyclerOnScrollListener mOnScrollListener = new EndlessRecyclerOnScrollListener() {
+        @Override
+        public void onLoadNextPage(View view) {
+            super.onLoadNextPage(view);
+
+            LoadingFooter.State state = RecyclerViewStateUtils.getFooterViewState(mList);
+            if (state == LoadingFooter.State.Loading) {
+                return;
+            }
+
+            if (mData.getTotalCount() > pageIndex * pageSize) {
+                RecyclerViewStateUtils.setFooterViewState(mActivity, mList, pageSize, LoadingFooter.State.Loading, null);
+                pageIndex++;
+                getGiveToMeFriendOrderList();
+            } else {
+                RecyclerViewStateUtils.setFooterViewState(mActivity, mList, pageSize, LoadingFooter.State.TheEnd, null);
+            }
+        }
+    };
 
     @Override
     public void onDetailInteraction(FriendOrderEntity.DataBean.ListBean item) {

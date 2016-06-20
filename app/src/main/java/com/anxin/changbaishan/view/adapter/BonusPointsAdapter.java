@@ -29,6 +29,13 @@ public class BonusPointsAdapter extends RecyclerView.Adapter<BonusPointsAdapter.
         this.mFragment = fragment;
     }
 
+    public void addData(List<BonusPointsEntity.DataBean.ListBean> list) {
+        if (list != null && list.size() > 0) {
+            mList.addAll(list);
+            notifyDataSetChanged();
+        }
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())

@@ -52,6 +52,7 @@ public class OrderActivity extends SwipeBackActivity {
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setOffscreenPageLimit(2);
         mViewPager.setCurrentItem(index);
 
         TabLayout tabLayout = (TabLayout)findViewById(R.id.tab_layout);

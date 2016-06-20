@@ -32,6 +32,20 @@ public class OrderStartItemAdapter extends RecyclerView.Adapter<OrderStartItemAd
         this.mListener = listener;
     }
 
+    public void addData(List<MyOrderItemEntity.DataBean.ListBean> list) {
+        if (list != null && list.size() > 0) {
+            mList.addAll(list);
+            notifyDataSetChanged();
+        }
+    }
+
+    public void setList(List<MyOrderItemEntity.DataBean.ListBean> list) {
+        if (list != null && list.size() > 0) {
+            mList = list;
+            notifyDataSetChanged();
+        }
+    }
+
     public List<MyOrderItemEntity.DataBean.ListBean> getList() {
         return mList;
     }

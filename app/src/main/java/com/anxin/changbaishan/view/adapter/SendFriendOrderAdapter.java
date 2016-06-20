@@ -35,6 +35,13 @@ public class SendFriendOrderAdapter extends RecyclerView.Adapter<SendFriendOrder
         mList = list;
     }
 
+    public void addData(List<FriendOrderEntity.DataBean.ListBean> list) {
+        if (null != list && list.size() > 0) {
+            mList.addAll(list);
+            notifyDataSetChanged();
+        }
+    }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())

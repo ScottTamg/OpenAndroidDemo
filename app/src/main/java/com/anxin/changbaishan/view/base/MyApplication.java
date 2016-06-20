@@ -10,7 +10,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.Volley;
 import com.anxin.changbaishan.utils.SPUtil;
-import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
 /**
@@ -33,7 +32,7 @@ public class MyApplication extends Application {
         super.onCreate();
         sInstance = this;
         mSpUtil = new SPUtil(getApplicationContext());
-        mRefWatcher = LeakCanary.install(this);
+//        mRefWatcher = LeakCanary.install(this);
     }
 
     public static RefWatcher getRefWatcher(Context context) {

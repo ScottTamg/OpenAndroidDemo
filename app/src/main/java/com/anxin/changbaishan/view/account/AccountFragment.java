@@ -3,9 +3,13 @@ package com.anxin.changbaishan.view.account;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.InputFilter;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +17,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.anxin.changbaishan.R;
 import com.anxin.changbaishan.entity.MyInfoEntity;
+import com.anxin.changbaishan.entity.UploadPhotoEntity;
 import com.anxin.changbaishan.http.VolleyRequest;
 import com.anxin.changbaishan.http.VolleyRequestListener;
+import com.anxin.changbaishan.utils.Base64Util;
+import com.anxin.changbaishan.utils.GlideImageLoader;
+import com.anxin.changbaishan.utils.ImageLoadUtil;
 import com.anxin.changbaishan.utils.InputFilterMinMax;
 import com.anxin.changbaishan.utils.PhoneUtils;
 import com.anxin.changbaishan.utils.SPUtil;
@@ -36,9 +45,17 @@ import com.anxin.changbaishan.view.account.friend.SendFriendActivity;
 import com.anxin.changbaishan.view.account.order.OrderActivity;
 import com.anxin.changbaishan.widget.dragindicator.DragIndicatorView;
 
+import java.util.List;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cn.finalteam.galleryfinal.CoreConfig;
+import cn.finalteam.galleryfinal.FunctionConfig;
+import cn.finalteam.galleryfinal.GalleryFinal;
+import cn.finalteam.galleryfinal.ImageLoader;
+import cn.finalteam.galleryfinal.ThemeConfig;
+import cn.finalteam.galleryfinal.model.PhotoInfo;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -217,7 +234,7 @@ public class AccountFragment extends Fragment {
 
     @OnClick({R.id.btn_appointment, R.id.tv_distribution, R.id.tv_pending_payment, R.id.tv_points,
             R.id.rl_all_order, R.id.rl_address, R.id.rl_account, R.id.rl_gift, R.id.rl_shard,
-            R.id.rl_more, R.id.btn_login, R.id.btn_right})
+            R.id.rl_more, R.id.btn_login, R.id.btn_right, R.id.img_user_icon})
     public void onClick(View view) {
         Bundle bundle = new Bundle();
         switch (view.getId()) {
@@ -258,7 +275,118 @@ public class AccountFragment extends Fragment {
             case R.id.btn_right:
                 PhoneUtils.callDial(mActivity, PhoneUtils.PHONE);
                 break;
+            case R.id.img_user_icon:
+                uploadImage();
+                break;
         }
+    }
+
+    private final int REQUEST_CODE_CAMERA = 1000;
+    private final int REQUEST_CODE_GALLERY = 1001;
+    private final int REQUEST_CODE_CROP = 1002;
+    private final int REQUEST_CODE_EDIT = 1003;
+    private void uploadImage() {
+        ThemeConfig themeConfig = ThemeConfig.DEFAULT;
+        final FunctionConfig functionConfig = new FunctionConfig.Builder()
+                .setEnableEdit(true)
+                .setEnableCrop(true)
+                .setEnableRotate(true)
+                .setEnableCamera(true)
+                .setCropSquare(true)
+                .setForceCrop(true)
+                .setForceCropEdit(true)
+                .build();
+        ImageLoader imageLoader = new GlideImageLoader();
+        CoreConfig coreConfig = new CoreConfig.Builder(mActivity, imageLoader, themeConfig)
+                .setFunctionConfig(functionConfig)
+                .build();
+        GalleryFinal.init(coreConfig);
+
+        final PopupWindow popupWindow = new PopupWindow(mActivity);
+        popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
+        popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow.setContentView(LayoutInflater.from(mActivity).inflate(R.layout.layout_popup_window_list, null));
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0X00000000));
+        popupWindow.setOutsideTouchable(false);
+        popupWindow.setFocusable(true);
+        popupWindow.showAtLocation(mActivity.findViewById(R.id.img_user_icon), Gravity.BOTTOM, 0, 0);
+
+        Button btn1 = (Button) popupWindow.getContentView().findViewById(R.id.button);
+        Button btn2 = (Button) popupWindow.getContentView().findViewById(R.id.button2);
+        Button btn3 = (Button) popupWindow.getContentView().findViewById(R.id.button3);
+        Button btn4 = (Button) popupWindow.getContentView().findViewById(R.id.button4);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GalleryFinal.openGallerySingle(REQUEST_CODE_GALLERY, functionConfig, mOnHanlderResultCallback);
+            }
+        });
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GalleryFinal.openCamera(REQUEST_CODE_CAMERA, functionConfig, mOnHanlderResultCallback);
+            }
+        });
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GalleryFinal.openGallerySingle(REQUEST_CODE_GALLERY, functionConfig, mOnHanlderResultCallback);
+            }
+        });
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
+    }
+
+    private GalleryFinal.OnHanlderResultCallback mOnHanlderResultCallback = new GalleryFinal.OnHanlderResultCallback() {
+        @Override
+        public void onHanlderSuccess(int reqeustCode, List<PhotoInfo> resultList) {
+            if (resultList != null) {
+                mActivity.showShortToast("size=" + resultList.size());
+                if (null != resultList && resultList.size() > 0) {
+                    Bitmap bitmap = BitmapFactory.decodeFile(resultList.get(0).getPhotoPath());
+
+                    uploadPhoto(Base64Util.bitmapToBase64(bitmap));
+
+                    bitmap.recycle();
+                }
+            }
+        }
+
+        @Override
+        public void onHanlderFailure(int requestCode, String errorMsg) {
+            mActivity.showShortToast("size=" + errorMsg);
+        }
+    };
+
+    private void uploadPhoto(final String imageData) {
+        VolleyRequest.uploadPhoto(imageData, this.getClass().getSimpleName() + "image", new VolleyRequestListener() {
+            @Override
+            public void success(boolean isSuccess, String response, String error) {
+                if (isSuccess) {
+                    UploadPhotoEntity entity =
+                            mActivity.loadDataUtil.getJsonData(response, UploadPhotoEntity.class);
+                    if (0 == entity.getErrorNo()) {
+                        ImageLoadUtil.loadImage(mActivity, entity.getData().getUrl(), mImgUserIcon);
+                    } else if (-99 == entity.getErrorNo()) {
+                        mActivity.spUtil.put(SPUtil.TOKEN, "");
+                        uploadPhoto(imageData);
+                    } else if (-52 == entity.getErrorNo()) {
+                        mActivity.spUtil.put(SPUtil.ATOKEN, "");
+                        mActivity.startAnimActivity(RegisterActivity.class);
+                    } else {
+                        mActivity.showShortToast(entity.getMessage());
+                    }
+
+                } else {
+                    mActivity.showShortToast(error);
+                }
+            }
+        });
     }
 
     private void getMyInfo() {

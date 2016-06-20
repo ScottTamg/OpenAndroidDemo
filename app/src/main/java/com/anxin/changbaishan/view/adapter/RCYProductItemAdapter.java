@@ -3,7 +3,6 @@ package com.anxin.changbaishan.view.adapter;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,8 @@ import com.anxin.changbaishan.entity.ProductEntity;
 import com.anxin.changbaishan.utils.ImageLoadUtil;
 import com.anxin.changbaishan.view.home.HomeFragment;
 import com.anxin.changbaishan.view.home.HomeFragment.OnListHomeFragmentInteractionListener;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -47,9 +48,9 @@ public class RCYProductItemAdapter extends RecyclerView.Adapter<RCYProductItemAd
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.tvTitle.setText(Html.fromHtml(mValues.get(position).getName()
-                + "<font color='#999999'>" + mValues.get(position).getSummary()
-                + "</font>"));
+        holder.tvId.setText(mValues.get(position).getID());
+        holder.tvTitle.setText(mValues.get(position).getName()
+                + "（" + mValues.get(position).getSummary() + "）");
 //        holder.tvContent.setText(mValues.get(position).getSummary());
         holder.tvStandard.setText("规格：" + mValues.get(position).getStandard());
         holder.tvMoney.setText("￥：" + mValues.get(position).getSellPrice());
@@ -63,6 +64,7 @@ public class RCYProductItemAdapter extends RecyclerView.Adapter<RCYProductItemAd
                     holder.imgIcon.getLocationInWindow(location);
                     Drawable drawable = holder.imgIcon.getDrawable();
                     mListener.onListHomeFragmentInteraction(holder.mItem, drawable, location);
+                    EventBus.getDefault().post(holder.mItem);
                 }
             }
         });
@@ -74,6 +76,8 @@ public class RCYProductItemAdapter extends RecyclerView.Adapter<RCYProductItemAd
     }
 
     static public class ViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.tv_id)
+        TextView tvId;
         @Bind(R.id.tv_title)
         TextView tvTitle;
         @Bind(R.id.img_icon)

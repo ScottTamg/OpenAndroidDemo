@@ -71,7 +71,7 @@ public class ShareActivity extends SwipeBackActivity {
         popupWindow.setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         popupWindow.setHeight(ViewGroup.LayoutParams.WRAP_CONTENT);
         popupWindow.setContentView(LayoutInflater.from(this).inflate(R.layout.layout_popup_window, null));
-        popupWindow.setBackgroundDrawable(new ColorDrawable(0X00000000));
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0Xaa000000));
         popupWindow.setOutsideTouchable(false);
         popupWindow.setFocusable(true);
         popupWindow.showAtLocation(findViewById(R.id.btn_share), Gravity.BOTTOM, 0, 0);

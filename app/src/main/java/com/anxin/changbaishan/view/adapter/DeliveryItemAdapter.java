@@ -39,7 +39,17 @@ public class DeliveryItemAdapter extends RecyclerView.Adapter<DeliveryItemAdapte
     }
 
     public void setList(List<DeliveryListEntity.DataBean.ListBean> list) {
-        mList = list;
+        if (null != list && list.size() > 0) {
+            mList = list;
+            notifyDataSetChanged();
+        }
+    }
+
+    public void addData(List<DeliveryListEntity.DataBean.ListBean> list) {
+        if (null != list && list.size() > 0) {
+            mList.addAll(list);
+            notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -54,16 +64,13 @@ public class DeliveryItemAdapter extends RecyclerView.Adapter<DeliveryItemAdapte
         holder.mItem = mList.get(position);
         holder.mTvTime.setText(mList.get(position).getCTime());
         holder.mTvState.setText(mList.get(position).getStateName());
-        if (mList.get(position).getOrderList().size() >= 1) {
-            holder.mTvTitle.setText(mList.get(position).getOrderList().get(0).getName());
-            holder.mTvStandard.setText(mList.get(position).getOrderList().get(0).getStandard());
-            holder.mTvMoney.setText("配送：X" + mList.get(position).getOrderList().get(0).getCount());
-            ImageLoadUtil.loadImage(mContext, mList.get(position).getOrderList().get(0).getPhoto(),
-                    holder.mImgIcon);
-        }
-        if (mList.get(position).getOrderList().size() >= 2) {
-            holder.mTvCount.setText("水桶：X" + mList.get(position).getOrderList().get(1).getCount());
-        }
+        holder.mTvTitle.setText(mList.get(position).getOrderDetail().getName());
+        holder.mTvStandard.setText(mList.get(position).getOrderDetail().getStandard());
+        holder.mTvMoney.setText("配送：X" + mList.get(position).getOrderDetail().getWaterCount());
+        holder.mTvCount.setText("水桶：X" + mList.get(position).getOrderDetail().getCupCount());
+        ImageLoadUtil.loadImage(mContext, mList.get(position).getOrderDetail().getPhoto(),
+                holder.mImgIcon);
+
         switch (mList.get(position).getState()) {
             case 0:
                 holder.mBtnCancel.setVisibility(View.GONE);

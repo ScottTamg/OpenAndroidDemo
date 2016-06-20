@@ -282,10 +282,11 @@
                     <RadioButton
                         android:id="@+id/rb_working_day"
                         android:background="@drawable/edit_bg"
-                        android:layout_width="wrap_content"
+                        android:layout_width="50dp"
                         android:layout_height="36dp"
                         android:padding="@dimen/dp_5"
                         android:button="@null"
+                        android:gravity="center"
                         android:text="工作日"
                         android:textSize="@dimen/sp_12"
                         android:textColor="@color/black_666"/>
@@ -293,12 +294,13 @@
                     <RadioButton
                         android:id="@+id/rb_rest_day"
                         android:background="@drawable/edit_bg"
-                        android:layout_width="wrap_content"
+                        android:layout_width="50dp"
                         android:layout_height="36dp"
                         android:layout_marginRight="@dimen/dp_10"
                         android:layout_marginLeft="@dimen/dp_10"
                         android:padding="@dimen/dp_5"
                         android:button="@null"
+                        android:gravity="center"
                         android:text="休息日"
                         android:textSize="@dimen/sp_12"
                         android:textColor="@color/black_666"/>
@@ -306,11 +308,12 @@
                     <RadioButton
                         android:id="@+id/rb_all_day"
                         android:background="@color/default_red"
-                        android:layout_width="wrap_content"
+                        android:layout_width="50dp"
                         android:layout_height="36dp"
                         android:padding="@dimen/dp_5"
                         android:button="@null"
                         android:checked="true"
+                        android:gravity="center"
                         android:text="均可"
                         android:textSize="@dimen/sp_12"
                         android:textColor="@color/white"/>

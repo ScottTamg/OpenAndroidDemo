@@ -8,8 +8,8 @@ import java.util.List;
 public class DeliveryListEntity extends BaseEntity {
 
     /**
-     * totalCount : 50
-     * list : [{"ID":85,"CTime":"2016-05-25 13:45","State":0,"StateName":"申请配送","orderList":[{"ProductID":1,"Count":4,"Name":"水桶","Standard":"20厘米高","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product.png"}],"hasComment":0},{"ID":84,"CTime":"2016-05-25 11:50","State":0,"StateName":"申请配送","orderList":[{"ProductID":1,"Count":4,"Name":"水桶","Standard":"20厘米高","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product.png"}],"hasComment":0},{"ID":83,"CTime":"2016-05-25 11:50","State":0,"StateName":"申请配送","orderList":[{"ProductID":1,"Count":4,"Name":"水桶","Standard":"20厘米高","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product.png"}],"hasComment":0},{"ID":82,"CTime":"2016-05-24 13:36","State":0,"StateName":"申请配送","orderList":[{"ProductID":1,"Count":4,"Name":"水桶","Standard":"20厘米高","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product.png"},{"ProductID":2,"Count":8,"Name":"长白山箱装水","Standard":"每箱10瓶","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product.png"}],"hasComment":1},{"ID":81,"CTime":"2016-05-23 14:37","State":0,"StateName":"申请配送","orderList":[{"ProductID":1,"Count":4,"Name":"水桶","Standard":"20厘米高","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product.png"},{"ProductID":2,"Count":8,"Name":"长白山箱装水","Standard":"每箱10瓶","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product.png"}],"hasComment":0},{"ID":80,"CTime":"2016-05-19 21:21","State":0,"StateName":"申请配送","orderList":[{"ProductID":1,"Count":4,"Name":"水桶","Standard":"20厘米高","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product.png"},{"ProductID":2,"Count":8,"Name":"长白山箱装水","Standard":"每箱10瓶","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product.png"}],"hasComment":1},{"ID":79,"CTime":"2016-05-19 21:20","State":0,"StateName":"申请配送","orderList":[{"ProductID":1,"Count":5,"Name":"水桶","Standard":"20厘米高","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product.png"},{"ProductID":2,"Count":11,"Name":"长白山箱装水","Standard":"每箱10瓶","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product.png"}],"hasComment":0},{"ID":78,"CTime":"2016-05-19 21:20","State":0,"StateName":"申请配送","orderList":[{"ProductID":1,"Count":5,"Name":"水桶","Standard":"20厘米高","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product.png"},{"ProductID":2,"Count":11,"Name":"长白山箱装水","Standard":"每箱10瓶","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product.png"}],"hasComment":0},{"ID":77,"CTime":"2016-05-19 21:20","State":0,"StateName":"申请配送","orderList":[{"ProductID":1,"Count":5,"Name":"水桶","Standard":"20厘米高","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product.png"},{"ProductID":2,"Count":11,"Name":"长白山箱装水","Standard":"每箱10瓶","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product.png"}],"hasComment":0},{"ID":76,"CTime":"2016-05-19 21:20","State":0,"StateName":"申请配送","orderList":[{"ProductID":1,"Count":5,"Name":"水桶","Standard":"20厘米高","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product.png"},{"ProductID":2,"Count":11,"Name":"长白山箱装水","Standard":"每箱10瓶","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product.png"}],"hasComment":0}]
+     * totalCount : 5
+     * list : [{"ID":23,"CTime":"2016-06-16 10:09","State":0,"StateName":"等待确认","orderDetail":{"name":"经典箱装水","Standard":"每箱10瓶","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product2.png","waterCount":"8","cupCount":"4"},"hasComment":0},{"ID":18,"CTime":"2016-06-12 11:46","State":0,"StateName":"等待确认","orderDetail":{"name":"经典箱装水","Standard":"每箱10瓶","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product2.png","waterCount":"14","cupCount":"6"},"hasComment":0},{"ID":3,"CTime":"2016-06-06 13:41","State":0,"StateName":"等待确认","orderDetail":{"name":"经典箱装水","Standard":"每箱10瓶","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product2.png","waterCount":"8","cupCount":"4"},"hasComment":1},{"ID":2,"CTime":"2016-06-03 17:44","State":0,"StateName":"等待确认","orderDetail":{"name":"经典箱装水","Standard":"每箱10瓶","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product2.png","waterCount":"8","cupCount":"4"},"hasComment":0},{"ID":1,"CTime":"2016-06-03 17:36","State":0,"StateName":"等待确认","orderDetail":{"name":"经典箱装水","Standard":"每箱10瓶","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product2.png","waterCount":"8","cupCount":"4"},"hasComment":0}]
      */
 
     private DataBean data;
@@ -25,11 +25,11 @@ public class DeliveryListEntity extends BaseEntity {
     public static class DataBean {
         private int totalCount;
         /**
-         * ID : 85
-         * CTime : 2016-05-25 13:45
+         * ID : 23
+         * CTime : 2016-06-16 10:09
          * State : 0
-         * StateName : 申请配送
-         * orderList : [{"ProductID":1,"Count":4,"Name":"水桶","Standard":"20厘米高","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product.png"}]
+         * StateName : 等待确认
+         * orderDetail : {"name":"经典箱装水","Standard":"每箱10瓶","Photo":"http://static.anxin.com/changbaishan/m/images/home/temp-product2.png","waterCount":"8","cupCount":"4"}
          * hasComment : 0
          */
 
@@ -56,16 +56,16 @@ public class DeliveryListEntity extends BaseEntity {
             private String CTime;
             private int State;
             private String StateName;
-            private int hasComment;
             /**
-             * ProductID : 1
-             * Count : 4
-             * Name : 水桶
-             * Standard : 20厘米高
-             * Photo : http://static.anxin.com/changbaishan/m/images/home/temp-product.png
+             * name : 经典箱装水
+             * Standard : 每箱10瓶
+             * Photo : http://static.anxin.com/changbaishan/m/images/home/temp-product2.png
+             * waterCount : 8
+             * cupCount : 4
              */
 
-            private List<OrderListBean> orderList;
+            private OrderDetailBean orderDetail;
+            private int hasComment;
 
             public int getID() {
                 return ID;
@@ -99,6 +99,14 @@ public class DeliveryListEntity extends BaseEntity {
                 StateName = stateName;
             }
 
+            public OrderDetailBean getOrderDetail() {
+                return orderDetail;
+            }
+
+            public void setOrderDetail(OrderDetailBean orderDetail) {
+                this.orderDetail = orderDetail;
+            }
+
             public int getHasComment() {
                 return hasComment;
             }
@@ -107,43 +115,19 @@ public class DeliveryListEntity extends BaseEntity {
                 this.hasComment = hasComment;
             }
 
-            public List<OrderListBean> getOrderList() {
-                return orderList;
-            }
-
-            public void setOrderList(List<OrderListBean> orderList) {
-                this.orderList = orderList;
-            }
-
-            public static class OrderListBean {
-                private int ProductID;
-                private int Count;
-                private String Name;
+            public static class OrderDetailBean {
+                private String name;
                 private String Standard;
                 private String Photo;
-
-                public int getProductID() {
-                    return ProductID;
-                }
-
-                public void setProductID(int productID) {
-                    ProductID = productID;
-                }
-
-                public int getCount() {
-                    return Count;
-                }
-
-                public void setCount(int count) {
-                    Count = count;
-                }
+                private String waterCount;
+                private String cupCount;
 
                 public String getName() {
-                    return Name;
+                    return name;
                 }
 
                 public void setName(String name) {
-                    Name = name;
+                    this.name = name;
                 }
 
                 public String getStandard() {
@@ -160,6 +144,22 @@ public class DeliveryListEntity extends BaseEntity {
 
                 public void setPhoto(String photo) {
                     Photo = photo;
+                }
+
+                public String getWaterCount() {
+                    return waterCount;
+                }
+
+                public void setWaterCount(String waterCount) {
+                    this.waterCount = waterCount;
+                }
+
+                public String getCupCount() {
+                    return cupCount;
+                }
+
+                public void setCupCount(String cupCount) {
+                    this.cupCount = cupCount;
                 }
             }
         }
